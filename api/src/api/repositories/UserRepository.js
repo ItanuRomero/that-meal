@@ -14,6 +14,12 @@ class UserRepository{
       return newUser;
     }
 
+    async update(user, userId){
+      const newUser = new User(user);
+      database.update(newUser, userId);
+      return newUser;
+    }
+
     async find(userId){
       return database.findByUserId(userId);
     }

@@ -44,6 +44,14 @@ module.exports = {
       });
     },
 
+    update: function (req, res) {
+      UserService.updateUser(req.body, req.params.user_id).then((status) => {
+        res.statusCode = 200;
+        res.set("Content-Type", "application/json");
+        res.send(JSON.stringify(status));
+      });
+    },
+
     remove: function (req, res) {
       UserService.removeUserById(req.params.user_id).then((status) => {
         res.statusCode = 200;

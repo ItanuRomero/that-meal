@@ -17,6 +17,16 @@ module.exports = {
 
       return {codeStatus: 404, status: "Não foi possível criar o usuário"};
     },
+
+    updateUser: async function (user, userId){
+      try{
+        await UserRepository.update(user, userId);
+        return {codeStatus: 201, status: "Usuário alterado com sucesso."};
+      }
+      catch(e){
+        return {codeStatus: 404, status: "Não foi possível alterar o usuário"};
+      } 
+    },
     
     removeUserById: async function(userId) {
       const status = await UserRepository.remove(userId);
