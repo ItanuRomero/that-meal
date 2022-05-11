@@ -114,6 +114,270 @@ paths:
           description: Não permitido
         '404':
           description: Não encontrado
+  /recipe:
+    get:
+      summary: Busca todas as receitas criadas
+      tags:
+        - recipe
+      description: |
+        Listagem de todas as receitas disponíveis na plataforma
+      responses:
+        '200':
+          description: Lista de receitas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+        '400':
+          description: bad input parameter
+    post:
+      summary: Cria uma nova receita
+      tags:
+        - recipe
+      description: Registra receita | Add nova receita ao banco de dados
+      responses:
+        '201':
+          description: Nova receita cadastrada
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+        '400':
+          description: 'invalid input, object invalid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+        description: Dado de inventario a ser adicionado
+  /recipe/{recipe_id}:
+    delete:
+      summary: Remove a receita a partir de seu ID
+      tags:
+        - recipe
+      description: Remove receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Receita deletada
+          content:
+            application/text:
+              example: Receita deletada
+        '401':
+          description: Não permitido
+        '404':
+          description: Não encontrado
+    post:
+      summary: Atualiza a receita do ID informado
+      tags:
+        - recipe
+      description: Atualiza a receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Receita atualizada
+          content:
+            application/text:
+              example: Receita atualizada
+        '401':
+          description: Não permitido
+        '404':
+          description: Não encontrado
+  /rating/{recipe_id}:
+    get:
+      summary: Busca todas as notas de uma receita
+      tags:
+        - rating
+      description: Listagem de todas as notas a partir de uma receita
+      parameters: 
+      - in: path
+        name: recipe_id
+        description: Id da receita
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Lista de notas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rating'
+        '400':
+          description: bad input parameter
+    post:
+      summary: Cria uma nova nota
+      tags:
+        - rating
+      description: Adiciona uma nota a uma receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Nota criada
+          content:
+            application/text:
+              example: Nota criada
+        '401':
+          description: Não permitido
+        '404':
+          description: Não encontrado
+  /comment/{recipe_id}:
+    get:
+      summary: Busca todos os comentários de uma receita
+      tags:
+        - comment
+      description: Listagem de todos os comentários a partir de uma receita
+      parameters: 
+      - in: path
+        name: recipe_id
+        description: Id da receita
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Lista de comentários
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+        '400':
+          description: bad input parameter
+    post:
+      summary: Cria um novo comentário
+      tags:
+        - comment
+      description: Adiciona um comentário a uma receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Comentário criado
+          content:
+            application/text:
+              example: Comentário criado
+        '401':
+          description: Não permitido
+        '404':
+          description: Não encontrado
+  /favourites:
+    get:
+      summary: Busca todas as receitas favoritas do usuário
+      tags:
+        - favourites
+      description: Listagem das receitas favoritas do usuário logado
+      responses:
+        '200':
+          description: Lista de receitas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Favourites'
+        '400':
+          description: bad input parameter
+  /favourites/{recipe_id}:
+    post:
+      summary: Cria um novo favorito
+      tags:
+        - favourites
+      description: Adiciona um favorito a uma receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Favorito criado
+          content:
+            application/text:
+              example: favorito criado
+        '401':
+          description: Não permitido
+        '404':
+          description: Não encontrado
+  /tags/{recipe_id}:
+    get:
+      summary: Busca todas as tags da receita
+      tags:
+        - tags
+      description: Listagem das tags da receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de receitas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Favourites'
+        '400':
+          description: bad input parameter
+    post:
+      summary: Adiciona uma tag a uma receita
+      tags:
+        - tags
+      description: Adiciona uma tag a uma receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Tag adicionada
+          content:
+            application/text:
+              example: Tag adicionada
+        '401':
+          description: Não permitido
+        '404':
+          description: Não encontrado
+
 
 components:
   schemas:
