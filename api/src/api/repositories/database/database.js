@@ -12,6 +12,11 @@ class Banco {
 
     addUser(novoUser) {
       if(novoUser instanceof User){
+        const user = this.users.filter(x => x.id == novoUser.id)[0];
+        if(user){
+          throw Error("Já existe esse usuário");
+        }
+
         this.users.push(novoUser)
       }else{
         throw Error("DB: Objeto não é do tipo User")
@@ -38,7 +43,13 @@ class Banco {
     }
 
     removeByUserId(userId) {
-      return this.users.splice(this.items.findIndex(x => x.id == userId), 1);
+      const user = this.users.findIndex(x => x.id == userId);
+
+      if(user === -1){
+        throw Error("Não existe esse usuário");
+      }
+
+      return this.users.splice(user, 1);
     }
 }
 

@@ -10,12 +10,13 @@ module.exports = {
     },
 
     addNewUser: async function (user){
-      const data = await UserRepository.create(user);
-      if(data){
+      try{
+        await UserRepository.create(user);
         return {codeStatus: 201, status: "Usuário criado com sucesso."};
+      }
+      catch(e){
+        return {codeStatus: 404, status: "Não foi possível criar o usuário"};
       } 
-
-      return {codeStatus: 404, status: "Não foi possível criar o usuário"};
     },
 
     updateUser: async function (user, userId){
@@ -29,11 +30,12 @@ module.exports = {
     },
     
     removeUserById: async function(userId) {
-      const status = await UserRepository.remove(userId);
-      if(status){
-        return {status: "Usuário removido com sucesso."};
+      try{
+        await UserRepository.remove(userId);
+        return {codeStatus: 201, status: "Usuário removido com sucesso."};
       } 
-
-      return {status: "Usuário não encontrado."};
+      catch(e){
+        return {codeStatus: 404, status: "Usuário não encontrado."};
+      }
     }
 }
