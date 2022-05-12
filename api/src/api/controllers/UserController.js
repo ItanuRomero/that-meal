@@ -11,28 +11,18 @@ module.exports = {
 
     add: function (req, res) {
       UserService.addNewUser(req.body).then((status) => {
-        res.set("Content-Type", "application/json");
         res.statusCode = status.codeStatus;
+        res.set("Content-Type", "application/json");
         res.send(JSON.stringify(status.status));
-      }).catch(error => {
-        res.statusCode = 500;
-        res.set("Content-Type", "application/text");
-        res.send(error.message);
       });
     },
 
     get: function (req, res) {
       const userId = req.params.user_id;
       UserService.getUserById(userId).then((status) => {
+        res.statusCode = status.codeStatus;
         res.set("Content-Type", "application/json");
-
-        if(user){
-          res.statusCode = status.codeStatus;
-          res.send(JSON.stringify(status.status));                    
-        } else{
-          res.statusCode = 404;
-          res.send({status: `Não foi possível encontrar o usuário para ${userId}.`});
-        }                
+        res.send(JSON.stringify(status.status));                    
       });
     },
 

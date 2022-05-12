@@ -6,36 +6,49 @@ module.exports = {
     },
 
     getUserById: async function (userId){
-      return await UserRepository.find(userId);
+      try{
+        const user = await UserRepository.find(userId);
+        return {codeStatus: 201, status: user};
+      }catch{
+        return {codeStatus: 404, status: "Usuário não encontrado"};
+      }
     },
 
     addNewUser: async function (user){
       try{
         await UserRepository.create(user);
-        return {codeStatus: 201, status: "Usuário criado com sucesso."};
+        return {codeStatus: 201, status: user};
       }
       catch(e){
-        return {codeStatus: 404, status: "Não foi possível criar o usuário"};
+        if(e.message.startsWith("DB:")){
+          return {codeStatus: 400, status: e.message};
+        }else{
+          return {codeStatus: 404, status: e.message};
+        }
       } 
     },
 
     updateUser: async function (user, userId){
       try{
         await UserRepository.update(user, userId);
-        return {codeStatus: 201, status: "Usuário alterado com sucesso."};
+        return {codeStatus: 201, status: "Usuário atualizado com sucesso"};
       }
       catch(e){
-        return {codeStatus: 404, status: "Não foi possível alterar o usuário"};
+        if(e.message.startsWith("DB:")){
+          return {codeStatus: 400, status: e.message};
+        }else{
+          return {codeStatus: 404, status: e.message};
+        }      
       } 
     },
     
     removeUserById: async function(userId) {
       try{
         await UserRepository.remove(userId);
-        return {codeStatus: 201, status: "Usuário removido com sucesso."};
+        return {codeStatus: 204, status: "Usuário desativado com sucesso"};
       } 
-      catch(e){
-        return {codeStatus: 404, status: "Usuário não encontrado."};
+      catch{
+        return {codeStatus: 404, status: "Usuário não encontrado"};
       }
     }
 }

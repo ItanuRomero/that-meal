@@ -16,7 +16,7 @@ class UserRepository{
 
     async update(user, userId){
       const newUser = new User(user);
-      database.update(newUser, userId);
+      database.updateUser(newUser, userId);
       return newUser;
     }
 

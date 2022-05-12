@@ -13,32 +13,39 @@ class Banco {
     addUser(novoUser) {
       if(novoUser instanceof User){
         const user = this.users.filter(x => x.id == novoUser.id)[0];
+
         if(user){
-          throw Error("Já existe esse usuário");
+          throw Error("Usuário já existe");
         }
 
         this.users.push(novoUser)
       }else{
-        throw Error("DB: Objeto não é do tipo User")
+        throw Error("DB: invalid input, object invalid")
       }
     }
 
     findByUserId(userId) {
-      return this.users.filter(x => x.id == userId)[0];
+      const user = this.users.filter(x => x.id == novoUser.id)[0];
+
+      if(user === -1){
+        throw Error();
+      }
+
+      return user;
     }
 
-    update(novoUser, userId) {
+    updateUser(novoUser, userId) {
       if(novoUser instanceof User){
         const user = this.users.findIndex(x => x.id == userId);
 
         if(user === -1){
-          throw Error("Não existe esse usuário");
+          throw Error("Usuário não encontrado");
         }
 
         novoUser.id = userId;
         this.users[user] = novoUser;
       }else{
-        throw Error("DB: Objeto não é do tipo User")
+        throw Error("DB: invalid input, object invalid")
       }
     }
 
@@ -46,7 +53,7 @@ class Banco {
       const user = this.users.findIndex(x => x.id == userId);
 
       if(user === -1){
-        throw Error("Não existe esse usuário");
+        throw Error();
       }
 
       return this.users.splice(user, 1);
