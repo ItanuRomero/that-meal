@@ -30,7 +30,14 @@ class Banco {
       if(novoRecipe instanceof Recipe){
         novoRecipe.id = this.recipes.length + 1;
         this.recipes.push(novoRecipe)
+        
+        const user = this.users.filter(x => x.id == novoRecipe.createdBy.id)[0];
 
+        if(user === undefined){
+          throw Error("Usuário não encontrado");
+        }
+
+        novoRecipe.createdBy = user;
         return novoRecipe;
       }else{
         throw Error("DB: invalid input, object invalid")

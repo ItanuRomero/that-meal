@@ -6,7 +6,7 @@ class Recipe {
     this.name = recipeDados.name,
     this.image = recipeDados.image,
     this.body = recipeDados.body,
-    this.createdBy = [new User(recipeDados.createdBy)]
+    this.createdBy = new User(recipeDados.createdBy)
   }
 }
 
