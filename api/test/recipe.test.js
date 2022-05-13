@@ -3,31 +3,31 @@ const app = require("../app");
 
 describe("Testes para as rotas de receita (/recipe)", () => {
   test("[GET /recipe] Lista todos as receitas", async () => {
-      const res = await request(app)
-        .get("/recipe")
-        .set('Accept', 'application/json');
+    const res = await request(app)
+      .get("/recipe")
+      .set('Accept', 'application/json');
 
-      expect(res.statusCode).toBe(200);
-      expect(res.body).toBeInstanceOf(Array);
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toBeInstanceOf(Array);
 
-      const objToTest = res.body[0];
+    const objToTest = res.body[0];
 
-      expect(objToTest).toHaveProperty("id");
-      expect(objToTest).toHaveProperty("name");
-      expect(objToTest).toHaveProperty("image");
-      expect(objToTest).toHaveProperty("body");
+    expect(objToTest).toHaveProperty("id");
+    expect(objToTest).toHaveProperty("name");
+    expect(objToTest).toHaveProperty("image");
+    expect(objToTest).toHaveProperty("body");
 
-      expect(objToTest).toHaveProperty("createdBy");
-      expect(objToTest).toHaveProperty(["createdBy", "id"]);
-      expect(objToTest).toHaveProperty(["createdBy", "email"]);
-      expect(objToTest).toHaveProperty(["createdBy", "username"]);
-      expect(objToTest).toHaveProperty(["createdBy", "birth"]);
-      expect(objToTest).toHaveProperty(["createdBy", "phone"]);
-      expect(objToTest).toHaveProperty(["createdBy", "password"]);
-      expect(objToTest).toHaveProperty(["createdBy", "createdAt"]);
-      expect(objToTest).toHaveProperty(["createdBy", "updatedAt"]);
-      expect(objToTest).toHaveProperty(["createdBy", "isAdmin"]);
-      expect(objToTest).toHaveProperty(["createdBy", "isActive"]);
+    expect(objToTest).toHaveProperty("createdBy");
+    expect(objToTest).toHaveProperty(["createdBy", "id"]);
+    expect(objToTest).toHaveProperty(["createdBy", "email"]);
+    expect(objToTest).toHaveProperty(["createdBy", "username"]);
+    expect(objToTest).toHaveProperty(["createdBy", "birth"]);
+    expect(objToTest).toHaveProperty(["createdBy", "phone"]);
+    expect(objToTest).toHaveProperty(["createdBy", "password"]);
+    expect(objToTest).toHaveProperty(["createdBy", "createdAt"]);
+    expect(objToTest).toHaveProperty(["createdBy", "updatedAt"]);
+    expect(objToTest).toHaveProperty(["createdBy", "isAdmin"]);
+    expect(objToTest).toHaveProperty(["createdBy", "isActive"]);
   });
 
   test("[GET /recipe/{recipe_id}] Lista uma receita a partir do id", async () => {
