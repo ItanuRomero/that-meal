@@ -5,8 +5,8 @@ module.exports = (database) => {
     new Recipe(
       {
         "name": "Suco de maçã",
-        "image": "path/to/image",
-        "body": "Texto com modo de preparo",
+        "image": "maca.png",
+        "body": "Bata 5x a maça no liquidificador com água",
         "createdBy": {
           "id": 1,
         }
@@ -17,9 +17,9 @@ module.exports = (database) => {
   database.addRecipe(
     new Recipe(
       {
-        "name": "Suco de maçã",
-        "image": "path/to/image",
-        "body": "Texto com modo de preparo",
+        "name": "Suco de melância",
+        "image": "melancia.png",
+        "body": "Bata 3x a melância no liquidificador",
         "createdBy": {
           "id": 2,
         }
