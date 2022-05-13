@@ -8,9 +8,9 @@ module.exports = {
     getUserById: async function (userId){
       try{
         const user = await UserRepository.find(userId);
-        return {codeStatus: 201, status: user};
+        return {codeStatus: 200, status: user};
       }catch{
-        return {codeStatus: 404, status: "Usuário não encontrado"};
+        return {codeStatus: 404, status: "Error: Usuário não encontrado"};
       }
     },
 
@@ -21,9 +21,9 @@ module.exports = {
       }
       catch(e){
         if(e.message.startsWith("DB:")){
-          return {codeStatus: 400, status: e.message};
+          return {codeStatus: 400, status: "Error: " + e.message};
         }else{
-          return {codeStatus: 404, status: e.message};
+          return {codeStatus: 404, status: "Error: " + e.message};
         }
       } 
     },
@@ -35,9 +35,9 @@ module.exports = {
       }
       catch(e){
         if(e.message.startsWith("DB:")){
-          return {codeStatus: 400, status: e.message};
+          return {codeStatus: 400, status: "Error: " + e.message};
         }else{
-          return {codeStatus: 404, status: e.message};
+          return {codeStatus: 404, status: "Error: " + e.message};
         }      
       } 
     },
@@ -45,10 +45,10 @@ module.exports = {
     removeUserById: async function(userId) {
       try{
         await UserRepository.remove(userId);
-        return {codeStatus: 204, status: "Usuário desativado com sucesso"};
+        return {codeStatus: 202, status: "Usuário desativado com sucesso"};
       } 
       catch{
-        return {codeStatus: 404, status: "Usuário não encontrado"};
+        return {codeStatus: 404, status: "Error: Usuário não encontrado"};
       }
     }
 }

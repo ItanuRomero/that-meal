@@ -1,13 +1,18 @@
 const User = require("./model/User");
+const Recipe = require("./model/Recipe");
 
-// Classe que serve de banco de dados temporário. Será substituído pelo ORM.
 class Banco {
     constructor() {
-      this.users = []
+      this.users = [];
+      this.recipes = [];
     }
 
     getAllUsers() {
       return this.users;
+    }
+
+    getAllRecipes() {
+      return this.recipes;
     }
 
     addUser(novoUser) {
@@ -24,26 +29,62 @@ class Banco {
       }
     }
 
-    findByUserId(userId) {
-      const user = this.users.filter(x => x.id == novoUser.id)[0];
+    addRecipe(novoRecipe) {
+      if(novoRecipe instanceof Recipe){
+        novoRecipe.id = this.recipes.length + 1;
+        this.recipes.push(novoRecipe)
 
-      if(user === -1){
+        return novoRecipe;
+      }else{
+        throw Error("DB: invalid input, object invalid")
+      }
+    }
+
+    findByUserId(userId) {
+      const user = this.users.filter(x => x.id == userId)[0];
+
+      if(user === undefined){
         throw Error();
       }
 
       return user;
     }
 
-    updateUser(novoUser, userId) {
-      if(novoUser instanceof User){
-        const user = this.users.findIndex(x => x.id == userId);
+    findByRecipeId(recipeId) {
+      const recipe = this.recipes.filter(x => x.id == recipeId)[0];
 
-        if(user === -1){
+      if(recipe === undefined){
+        throw Error();
+      }
+
+      return recipe;
+    }
+
+    updateUser(newUser, userId) {
+      if(newUser instanceof User){
+        const userIndex = this.users.findIndex(x => x.id == userId);
+
+        if(userIndex === -1){
           throw Error("Usuário não encontrado");
         }
 
-        novoUser.id = userId;
-        this.users[user] = novoUser;
+        newUser.id = userId;
+        this.users[userIndex] = newUser;
+      }else{
+        throw Error("DB: invalid input, object invalid")
+      }
+    }
+
+    updateRecipe(newRecipe, recipeId) {
+      if(newRecipe instanceof Recipe){
+        const recipeIndex = this.recipes.findIndex(x => x.id == recipeId);
+
+        if(recipeIndex === -1){
+          throw Error("Receita não encontrada");
+        }
+
+        newRecipe.id = recipeId;
+        this.recipes[recipeIndex] = newRecipe;
       }else{
         throw Error("DB: invalid input, object invalid")
       }
@@ -57,6 +98,16 @@ class Banco {
       }
 
       return this.users.splice(user, 1);
+    }
+
+    removeByRecipeId(recipeId) {
+      const recipe = this.recipes.findIndex(x => x.id == recipeId);
+
+      if(recipe === -1){
+        throw Error();
+      }
+
+      return this.recipes.splice(recipe, 1);
     }
 }
 
