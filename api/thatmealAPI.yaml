@@ -406,6 +406,7 @@ components:
     User:
       type: object
       required:
+        - id
         - email
         - username
         - birth
@@ -416,6 +417,9 @@ components:
         - isAdmin
         - isActive
       properties:
+        id:
+          type: long
+          example: 1
         email:
           type: string
           example: example@example.com
