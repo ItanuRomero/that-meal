@@ -20,11 +20,7 @@ module.exports = {
         return {codeStatus: 201, status: newRecipe};
       }
       catch(e){
-        if(e.message.startsWith("DB:")){
-          return {codeStatus: 400, status: "Error: " + e.message};
-        }else{
-          return {codeStatus: 404, status: "Error: " + e.message};
-        }
+        return {codeStatus: 400, status: "Error: " + e.message};
       } 
     },
 

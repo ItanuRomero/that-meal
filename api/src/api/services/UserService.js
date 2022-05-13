@@ -16,15 +16,11 @@ module.exports = {
 
     addNewUser: async function (user){
       try{
-        await UserRepository.create(user);
-        return {codeStatus: 201, status: user};
+        const newUser = await UserRepository.create(user);
+        return {codeStatus: 201, status: newUser};
       }
       catch(e){
-        if(e.message.startsWith("DB:")){
-          return {codeStatus: 400, status: "Error: " + e.message};
-        }else{
-          return {codeStatus: 404, status: "Error: " + e.message};
-        }
+        return {codeStatus: 400, status: "Error: " + e.message};
       } 
     },
 

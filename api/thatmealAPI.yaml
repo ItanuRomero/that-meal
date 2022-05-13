@@ -106,7 +106,7 @@ paths:
           schema:
             type: string
       responses:
-        '204':
+        '200':
           description: Usuário desativado com sucesso
           content:
             application/text:
@@ -177,6 +177,30 @@ paths:
               $ref: '#/components/schemas/Recipe'
         description: Dado de inventario a ser adicionado
   /recipe/{recipe_id}:
+    get:
+      summary: Busca a receita do ID informado
+      tags:
+        - recipe
+      description: |
+        Busca a receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Recipe ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Receita desativada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+        '404':
+          description: Receita não encontrada
     delete:
       summary: Remove a receita a partir de seu ID
       tags:
@@ -190,7 +214,7 @@ paths:
           schema:
             type: string
       responses:
-        '204':
+        '200':
           description: Receita deletada
           content:
             application/text:
@@ -199,7 +223,7 @@ paths:
           description: Não permitido
         '404':
           description: Não encontrado
-    post:
+    put:
       summary: Atualiza a receita do ID informado
       tags:
         - recipe
@@ -418,7 +442,7 @@ components:
         - isActive
       properties:
         id:
-          type: long
+          type: number
           example: 1
         email:
           type: string
@@ -453,6 +477,7 @@ components:
     Recipe:
       type: object
       required:
+        - id
         - name
         - image
         - body
@@ -460,6 +485,9 @@ components:
         - createdAt
         - updatedAt
       properties:
+        id:
+          type: number
+          example: 1
         name:
           type: string
           example: Suco de maçã

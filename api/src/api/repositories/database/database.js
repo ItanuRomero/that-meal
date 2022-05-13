@@ -17,13 +17,10 @@ class Banco {
 
     addUser(novoUser) {
       if(novoUser instanceof User){
-        const user = this.users.filter(x => x.id == novoUser.id)[0];
-
-        if(user){
-          throw Error("Usuário já existe");
-        }
-
+        novoUser.id = this.users.length + 1;
         this.users.push(novoUser)
+
+        return novoUser;
       }else{
         throw Error("DB: invalid input, object invalid")
       }

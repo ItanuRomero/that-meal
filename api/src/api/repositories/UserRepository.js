@@ -9,9 +9,7 @@ class UserRepository{
     }
 
     async create(user){
-      const newUser = new User(user);
-      database.addUser(newUser);
-      return newUser;
+      return database.addUser(new User(user));
     }
 
     async update(user, userId){
