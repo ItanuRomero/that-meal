@@ -15,38 +15,38 @@ class Banco {
       return this.recipes;
     }
 
-    addUser(novoUser) {
-      if(novoUser instanceof User){
+    addUser(newUser) {
+      if(newUser instanceof User){
         if(this.users.length === 0){
-          novoUser.id = 1;
+          newUser.id = 1;
         }else{
-          novoUser.id = parseInt(this.users[this.users.length - 1].id) + 1;
+          newUser.id = parseInt(this.users[this.users.length - 1].id) + 1;
         }
 
-        this.users.push(novoUser)
-        return novoUser;
+        this.users.push(newUser)
+        return newUser;
       }else{
         throw Error("DB: invalid input, object invalid")
       }
     }
 
-    addRecipe(novoRecipe) {
-      if(novoRecipe instanceof Recipe){
+    addRecipe(newRecipe) {
+      if(newRecipe instanceof Recipe){
         if(this.recipes.length === 0){
-          novoRecipe.id = 1;
+          newRecipe.id = 1;
         }else{
-          novoRecipe.id = parseInt(this.recipes[this.recipes.length - 1].id) + 1;
+          newRecipe.id = parseInt(this.recipes[this.recipes.length - 1].id) + 1;
         }
 
-        const user = this.users.filter(x => x.id == novoRecipe.createdBy.id)[0];
+        const user = this.users.filter(x => x.id == newRecipe.createdBy.id)[0];
         if(user === undefined){
           throw Error("Usuário não encontrado");
         }
 
-        novoRecipe.createdBy = user;
+        newRecipe.createdBy = user;
 
-        this.recipes.push(novoRecipe)
-        return novoRecipe;
+        this.recipes.push(newRecipe)
+        return newRecipe;
       }else{
         throw Error("DB: invalid input, object invalid")
       }
