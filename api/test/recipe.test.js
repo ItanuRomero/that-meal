@@ -74,17 +74,36 @@ describe("Testes para as rotas de receita (/recipe)", () => {
 
     json.id = 3;
     json.createdBy.id = 1;
-    json.createdBy.email = "example@example.com";
-    json.createdBy.username = "MyUsername";
-    json.createdBy.birth = "2000-08-29T09:12:33.001Z";
-    json.createdBy.phone = "(11)99999-9999";
-    json.createdBy.password = "string hash";
-    json.createdBy.createdAt = "2016-08-29T09:12:33.001Z";
-    json.createdBy.updatedAt = "2016-08-29T09:12:33.001Z";
+    json.createdBy.email = "gabriel.pereira@gmail.com";
+    json.createdBy.username = "Gabriel Pereira";
+    json.createdBy.birth = "2001-08-29T09:12:33.001Z";
+    json.createdBy.phone = "(11)97178-4441";
+    json.createdBy.password = "!22mfwa$1";
+    json.createdBy.createdAt = "2022-04-29T09:12:33.001Z";
+    json.createdBy.updatedAt = "2022-04-29T09:12:33.001Z";
     json.createdBy.isAdmin = true;
     json.createdBy.isActive = true;
 
     expect(res.body).toEqual(json);
+  });
+
+  test("[PUT /recipe/{id_recipe}] Atualiza uma receita", async () => {
+    const json = {
+      name: "Suco de morango",
+      image: "morango.png",
+      body: "7 morangos batidos",
+      createdBy: {
+        id: 4
+      }
+    }
+
+    const res = await request(app)
+      .put("/recipe/1")
+      .send(json)
+      .set("Content-Type", "application/json");
+
+    expect(res.statusCode).toBe(201);                        
+    expect(res.body).toEqual("Receita atualizada com sucesso");
   });
 
   test("[DELETE /recipe/{id_recipe}] Remove uma receita pelo id", async () => {
