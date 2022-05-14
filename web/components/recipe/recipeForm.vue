@@ -36,7 +36,7 @@
       </b-form-group>
     <b-form-group id="input-group-2" label="Imagem da receita:" label-for="input-2">
         <b-form-file
-            v-model="form.photo"
+            v-model="form.images"
             :state="Boolean(form.images)"
             placeholder="Escolha uma foto bem bonita pra gente mostrar"
             drop-placeholder="Pode soltar sua foto aqui!"

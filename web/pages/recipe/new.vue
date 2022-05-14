@@ -15,7 +15,7 @@ import RecipeForm from "../../components/recipe/recipeForm.vue"
 import HeaderComponent from '../../components/header.vue'
 import NavbarComponent from '../../components/navbar.vue'
 export default {
-  name: 'IndexPage',
+  name: 'RecipeNew',
   components: {
     RecipeForm,
     HeaderComponent,

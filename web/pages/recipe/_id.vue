@@ -17,7 +17,7 @@ import HeaderComponent from '../../components/header.vue'
 import NavbarComponent from '../../components/navbar.vue'
 import RecipeDetail from '../../components/recipe/recipeDetail.vue'
 export default {
-  name: 'IndexPage',
+  name: 'RecipeDetail',
   components: {
     HeaderComponent,
     NavbarComponent,
@@ -26,7 +26,7 @@ export default {
   
   async asyncData({ $axios }) {
         try {
-          const recipe = await $axios.$get('recipe/someid');
+          const recipe = await $axios.$get(`recipe/${$route.params.id}`);
           return { recipe };
         } catch (ex) {
             console.log(ex);

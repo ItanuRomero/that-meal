@@ -25,7 +25,7 @@ export default {
     name: String,
     body: String,
     image: String,
-    id: String
+    id: Number
   },
   data() {
     return {

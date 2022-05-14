@@ -63,4 +63,8 @@ export default {
     background-size: contain;
     background-position: center;
   }
+
+  .container {
+    display: flex;
+  }
 </style>
