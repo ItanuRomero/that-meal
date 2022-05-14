@@ -2,10 +2,10 @@ const UserService = require("../services/UserService");
 
 module.exports = {
     listAll: function (req, res) {
-      res.statusCode = 200;
       UserService.getAllUsers().then(users => {
-          res.set("Content-Type", "application/json");
-          res.send(JSON.stringify(users));
+        res.statusCode = 200;
+        res.set("Content-Type", "application/json");
+        res.send(JSON.stringify(users));
       })
     },
 

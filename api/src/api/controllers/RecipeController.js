@@ -2,10 +2,10 @@ const RecipeService = require("../services/RecipeService");
 
 module.exports = {
     listAll: function (req, res) {
-      res.statusCode = 200;
       RecipeService.getAllRecipes().then(recipes => {
-          res.set("Content-Type", "application/json");
-          res.send(JSON.stringify(recipes));
+        res.statusCode = 200;
+        res.set("Content-Type", "application/json");
+        res.send(JSON.stringify(recipes));
       })
     },
 

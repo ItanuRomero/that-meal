@@ -1,37 +1,36 @@
 const request = require("supertest");
 const app = require("../app");
 
-describe("Testes para o path 'patrimônio'", () => {
-  test("[GET /patrimonio] Recupera todos os itens de patrimonio", async () => {
-      const res = await request(app)
-        .get("/recipe")
-        .set('Accept', 'application/json');
+describe("Testes para as rotas de receita (/recipe)", () => {
+  test("[GET /recipe] Lista todos as receitas", async () => {
+    const res = await request(app)
+      .get("/recipe")
+      .set('Accept', 'application/json');
 
-      expect(res.statusCode).toBe(200);
-      expect(res.body).toBeInstanceOf(Array);
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toBeInstanceOf(Array);
 
-      const objToTest = res.body[0];
+    const objToTest = res.body[0];
 
-      expect(objToTest).toHaveProperty("id");
-      expect(objToTest).toHaveProperty("name");
+    expect(objToTest).toHaveProperty("id");
+    expect(objToTest).toHaveProperty("name");
+    expect(objToTest).toHaveProperty("image");
+    expect(objToTest).toHaveProperty("body");
 
-      expect(objToTest).toHaveProperty("image");
-      expect(objToTest).toHaveProperty("body");
-
-      expect(objToTest).toHaveProperty("createdBy");
-      expect(objToTest).toHaveProperty(["createdBy", "id"]);
-      expect(objToTest).toHaveProperty(["createdBy", "email"]);
-      expect(objToTest).toHaveProperty(["createdBy", "username"]);
-      expect(objToTest).toHaveProperty(["createdBy", "birth"]);
-      expect(objToTest).toHaveProperty(["createdBy", "phone"]);
-      expect(objToTest).toHaveProperty(["createdBy", "password"]);
-      expect(objToTest).toHaveProperty(["createdBy", "createdAt"]);
-      expect(objToTest).toHaveProperty(["createdBy", "updatedAt"]);
-      expect(objToTest).toHaveProperty(["createdBy", "isAdmin"]);
-      expect(objToTest).toHaveProperty(["createdBy", "isActive"]);
+    expect(objToTest).toHaveProperty("createdBy");
+    expect(objToTest).toHaveProperty(["createdBy", "id"]);
+    expect(objToTest).toHaveProperty(["createdBy", "email"]);
+    expect(objToTest).toHaveProperty(["createdBy", "username"]);
+    expect(objToTest).toHaveProperty(["createdBy", "birth"]);
+    expect(objToTest).toHaveProperty(["createdBy", "phone"]);
+    expect(objToTest).toHaveProperty(["createdBy", "password"]);
+    expect(objToTest).toHaveProperty(["createdBy", "createdAt"]);
+    expect(objToTest).toHaveProperty(["createdBy", "updatedAt"]);
+    expect(objToTest).toHaveProperty(["createdBy", "isAdmin"]);
+    expect(objToTest).toHaveProperty(["createdBy", "isActive"]);
   });
 
-  test("[GET /patrimonio/{patrimonio_id}] Recupera um item de patrimonio por id", async () => {
+  test("[GET /recipe/{recipe_id}] Lista uma receita a partir do id", async () => {
     const res = await request(app)
       .get("/recipe/1")
       .set('Accept', 'application/json');
@@ -56,7 +55,7 @@ describe("Testes para o path 'patrimônio'", () => {
     expect(res.body).toHaveProperty(["createdBy", "isActive"]);
   });
 
-  test("[POST /patrimonio] Criação de um novo item de patrimonio", async () => {
+  test("[POST /recipe] Cria uma nova receita", async () => {
     const json = {
       name: "Suco de laranja",
       image: "laranja.png",
@@ -65,8 +64,6 @@ describe("Testes para o path 'patrimônio'", () => {
         id: 1
       }
     }
-
-    console.log(JSON.stringify(json));
 
     const res = await request(app)
       .post("/recipe")
@@ -77,44 +74,62 @@ describe("Testes para o path 'patrimônio'", () => {
 
     json.id = 3;
     json.createdBy.id = 1;
-    json.createdBy.email = "example@example.com";
-    json.createdBy.username = "MyUsername";
-    json.createdBy.birth = "2000-08-29T09:12:33.001Z";
-    json.createdBy.phone = "(11)99999-9999";
-    json.createdBy.password = "string hash";
-    json.createdBy.createdAt = "2016-08-29T09:12:33.001Z";
-    json.createdBy.updatedAt = "2016-08-29T09:12:33.001Z";
+    json.createdBy.email = "gabriel.pereira@gmail.com";
+    json.createdBy.username = "Gabriel Pereira";
+    json.createdBy.birth = "2001-08-29T09:12:33.001Z";
+    json.createdBy.phone = "(11)97178-4441";
+    json.createdBy.password = "!22mfwa$1";
+    json.createdBy.createdAt = "2022-04-29T09:12:33.001Z";
+    json.createdBy.updatedAt = "2022-04-29T09:12:33.001Z";
     json.createdBy.isAdmin = true;
     json.createdBy.isActive = true;
 
     expect(res.body).toEqual(json);
   });
 
-  test("[DELETE /recipe/{id_recipe}] Remove um item de patrimonio por id", async () => {
-      const res = await request(app)
-        .delete("/recipe/1")
-        .set('Accept', 'application/json');
+  test("[PUT /recipe/{id_recipe}] Atualiza uma receita", async () => {
+    const json = {
+      name: "Suco de morango",
+      image: "morango.png",
+      body: "7 morangos batidos",
+      createdBy: {
+        id: 4
+      }
+    }
 
-      expect(res.statusCode).toBe(202); 
-      expect(res.body).toEqual("Receita desativada com sucesso");
+    const res = await request(app)
+      .put("/recipe/1")
+      .send(json)
+      .set("Content-Type", "application/json");
+
+    expect(res.statusCode).toBe(201);                        
+    expect(res.body).toEqual("Receita atualizada com sucesso");
+  });
+
+  test("[DELETE /recipe/{id_recipe}] Remove uma receita pelo id", async () => {
+    const res = await request(app)
+      .delete("/recipe/1")
+      .set('Accept', 'application/json');
+
+    expect(res.statusCode).toBe(202); 
+    expect(res.body).toEqual("Receita desativada com sucesso");
   });
 
   const agent = request.agent(app);
 
-  test("Não retorna objeto pro Id em um GET após executar um DELETE ", async () => {
+  test("Deleta receita e tenta retornar essa receita deletada (erro 404)", async () => {
+    const resDelete = await agent
+      .delete("/recipe/2")
+      .set('Accept', 'application/json');
 
-      const resPOST = await agent
-        .delete("/recipe/2")
-        .set('Accept', 'application/json');
+    expect(resDelete.statusCode).toBe(202); 
+    expect(resDelete.body).toEqual("Receita desativada com sucesso");
 
-      expect(resPOST.statusCode).toBe(202); 
-      expect(resPOST.body).toEqual("Receita desativada com sucesso");
+    const resGet = await agent
+      .get("/recipe/2")
+      .set('Accept', 'application/json');
 
-      const resGET = await agent
-        .get("/recipe/2")
-        .set('Accept', 'application/json');
-
-      expect(resGET.statusCode).toBe(404); 
-      expect(resGET.body).toEqual("Error: Receita não encontrada");
+    expect(resGet.statusCode).toBe(404); 
+    expect(resGet.body).toEqual("Error: Receita não encontrada");
   });
 });

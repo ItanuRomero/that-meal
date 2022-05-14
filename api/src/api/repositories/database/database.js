@@ -15,30 +15,38 @@ class Banco {
       return this.recipes;
     }
 
-    addUser(novoUser) {
-      if(novoUser instanceof User){
-        novoUser.id = this.users.length + 1;
-        this.users.push(novoUser)
+    addUser(newUser) {
+      if(newUser instanceof User){
+        if(this.users.length === 0){
+          newUser.id = 1;
+        }else{
+          newUser.id = parseInt(this.users[this.users.length - 1].id) + 1;
+        }
 
-        return novoUser;
+        this.users.push(newUser)
+        return newUser;
       }else{
         throw Error("DB: invalid input, object invalid")
       }
     }
 
-    addRecipe(novoRecipe) {
-      if(novoRecipe instanceof Recipe){
-        novoRecipe.id = this.recipes.length + 1;
-        this.recipes.push(novoRecipe)
-        
-        const user = this.users.filter(x => x.id == novoRecipe.createdBy.id)[0];
+    addRecipe(newRecipe) {
+      if(newRecipe instanceof Recipe){
+        if(this.recipes.length === 0){
+          newRecipe.id = 1;
+        }else{
+          newRecipe.id = parseInt(this.recipes[this.recipes.length - 1].id) + 1;
+        }
 
+        const user = this.users.filter(x => x.id == newRecipe.createdBy.id)[0];
         if(user === undefined){
           throw Error("Usuário não encontrado");
         }
 
-        novoRecipe.createdBy = user;
-        return novoRecipe;
+        newRecipe.createdBy = user;
+
+        this.recipes.push(newRecipe)
+        return newRecipe;
       }else{
         throw Error("DB: invalid input, object invalid")
       }
@@ -83,10 +91,12 @@ class Banco {
       if(newRecipe instanceof Recipe){
         const recipeIndex = this.recipes.findIndex(x => x.id == recipeId);
 
-        if(recipeIndex === -1){
-          throw Error("Receita não encontrada");
+        const user = this.users.filter(x => x.id == newRecipe.createdBy.id)[0];
+        if(user === undefined){
+          throw Error("Usuário não encontrado");
         }
 
+        newRecipe.createdBy = user;
         newRecipe.id = recipeId;
         this.recipes[recipeIndex] = newRecipe;
       }else{
