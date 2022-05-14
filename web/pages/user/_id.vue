@@ -11,7 +11,7 @@
 import HeaderComponent from '../../components/header.vue'
 import NavbarComponent from '../../components/navbar.vue'
 export default {
-  name: 'IndexPage',
+  name: 'UserDetailPage',
   components: {
     HeaderComponent,
     NavbarComponent,

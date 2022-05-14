@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'NavbarComponent',
+  name: 'RecipeCardComponent',
   props: {
     name: String,
     body: String,

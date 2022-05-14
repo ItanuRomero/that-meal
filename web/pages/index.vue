@@ -29,7 +29,7 @@ import NavbarComponent from '../components/navbar.vue'
 import ButtonAddRecipeComponent from "../components/recipe/button-add-recipe.vue"
 import RecipeCard from "../components/recipe/recipeCard.vue"
 export default {
-  name: 'IndexPage',
+  name: 'HomePage',
   components: {
     HeaderComponent,
     NavbarComponent,

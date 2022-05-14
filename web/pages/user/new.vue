@@ -14,7 +14,7 @@ import HeaderComponent from '../../components/header.vue'
 import NavbarComponent from '../../components/navbar.vue'
 import UserLoginForm from '../../components/user/newUserLogin.vue'
 export default {
-  name: 'IndexPage',
+  name: 'NewUserPage',
   components: {
     HeaderComponent,
     NavbarComponent,

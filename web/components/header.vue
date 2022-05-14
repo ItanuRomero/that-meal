@@ -2,7 +2,7 @@
   <div>
     <header>
       <b-navbar toggleable="lg" type="dark" variant="info" id="header">
-        <NuxtLink to="/bout">
+        <NuxtLink to="/about">
           <b-navbar-brand>that.meal</b-navbar-brand>
         </NuxtLink>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

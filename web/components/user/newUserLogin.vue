@@ -52,6 +52,7 @@
 
 <script>
   export default {
+    name: 'NewUserLoginComponent',
     data() {
       return {
         form: {

@@ -54,6 +54,7 @@
 
 <script>
   export default {
+    name: 'RecipeFormComponent',
     data() {
       return {
         form: {

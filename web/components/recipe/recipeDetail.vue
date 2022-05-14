@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'RecipeDetail',
+  name: 'RecipeDetailComponent',
   props: {
     name: String,
     body: String,

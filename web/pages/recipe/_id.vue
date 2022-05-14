@@ -17,7 +17,7 @@ import HeaderComponent from '../../components/header.vue'
 import NavbarComponent from '../../components/navbar.vue'
 import RecipeDetail from '../../components/recipe/recipeDetail.vue'
 export default {
-  name: 'RecipeDetail',
+  name: 'RecipeDetailPage',
   components: {
     HeaderComponent,
     NavbarComponent,

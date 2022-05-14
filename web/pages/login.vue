@@ -7,7 +7,7 @@
 <script>
 import FormLogin from "../components/user/formLogin.vue"
 export default {
-  name: 'IndexPage',
+  name: 'LoginPage',
   components:{
       FormLogin
   }
