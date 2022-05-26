@@ -70,10 +70,12 @@
       onSubmit(event) {
         event.preventDefault()
         this.$axios.post('recipe', {
+                  id: 10,
                   name: this.name,
                   body: this.body,
-                  categories: this.categories,
+                  image: this.images,
                   createdBy: {
+                    id: 3,
                     email: "example@example.com",
                     username: "MyUsername",
                     birth: "2016-08-29T09:12:33.001Z",
