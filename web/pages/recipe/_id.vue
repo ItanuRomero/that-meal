@@ -3,11 +3,20 @@
     <main>
     <HeaderComponent></HeaderComponent>
     <NavbarComponent></NavbarComponent>
-    <RecipeDetail
-        :name="recipe.name"
-        :body="recipe.body"
-        :image="recipe.image"
-        :id="recipe.id"></RecipeDetail>
+    <b-container>
+      <b-card 
+        :img-src="recipe.image" 
+        :img-alt="recipe.name"
+        :title="recipe.name"
+        img-top id="card" 
+        tag="article"
+        class="mb-2"
+      >
+        <b-card-text>
+            {{recipe.body}}
+        </b-card-text>
+      </b-card>
+    </b-container>
     </main>
   </div>
 </template>
@@ -15,18 +24,18 @@
 <script>
 import HeaderComponent from '../../components/header.vue'
 import NavbarComponent from '../../components/navbar.vue'
-import RecipeDetail from '../../components/recipe/recipeDetail.vue'
 export default {
   name: 'RecipeDetail',
   components: {
     HeaderComponent,
-    NavbarComponent,
-    RecipeDetail
+    NavbarComponent
   },
-  
-  async asyncData({ $axios }) {
+  async asyncData({ $axios, params }) {
         try {
-          const recipe = await $axios.$get(`recipe/${$route.params.id}`);
+          const recipe = await $axios.$get(`recipe/${params.id}`);
+          if (recipe.createdBy) {
+            recipe.createdBy = {username: recipe.createdBy.username}
+          }
           return { recipe };
         } catch (ex) {
             console.log(ex);

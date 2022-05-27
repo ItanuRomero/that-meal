@@ -3,6 +3,7 @@
     <main>
     <HeaderComponent></HeaderComponent>
     <NavbarComponent></NavbarComponent>
+    {{ $route.params.id }}
     </main>
   </div>
 </template>
@@ -16,7 +17,7 @@ export default {
     HeaderComponent,
     NavbarComponent,
   },
-
+  /*
   async asyncData({ $axios }) {
         try {
           console.log($route.params.id)
@@ -27,6 +28,7 @@ export default {
             return { user: false}
         }
     }
+    */
 }
 </script>
 
@@ -35,13 +37,5 @@ export default {
     height: 100vh;
     width: 100vw;
    
-  }
-  #background {
-    margin-top: 1rem;
-    height: 70vh;
-    width: 95vw;
-    background: url("~assets/home-bg.png") no-repeat;
-    background-size: contain;
-    background-position: center;
   }
 </style>

@@ -3,7 +3,7 @@
   <b-card
     :title="name"
     :img-src="image"
-    :img-alt="image"
+    :img-alt="name"
     img-top
     tag="article"
     style="max-width: 20rem;"
@@ -12,8 +12,9 @@
     <b-card-text>
       {{body}}
     </b-card-text>
-
-    <b-button href="#" variant="primary">Ver receita</b-button>
+    <NuxtLink :to="`/recipe/${id}`">
+    <b-button variant="primary">Ver receita</b-button>
+    </NuxtLink>
   </b-card>
 </div>
 </template>
