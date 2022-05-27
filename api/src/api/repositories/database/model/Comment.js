@@ -1,26 +1,22 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require("../database");
 
-class Recipe extends Model{};
+class Comment extends Model{};
 
-Recipe.init({
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  image: {
-    type: DataTypes.STRING,
-  },
-  body: {
+Comment.init({
+  text: {
     type: DataTypes.TEXT,
   },
   user_id: {
     type: DataTypes.INTEGER
   },
+  recipe_id: {
+    type: DataTypes.INTEGER
+  },
 }, { 
     sequelize,
-    modelName: "Recipe",
+    modelName: "Comment",
     timestamps: false
 });
 
-module.exports = Recipe;
+module.exports = Comment;

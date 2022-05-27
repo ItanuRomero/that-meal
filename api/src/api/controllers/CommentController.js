@@ -1,10 +1,10 @@
-const Recipe = require("../repositories/database/model/Recipe");
+const Comment = require("../repositories/database/model/Comment");
 
 module.exports = {
   async listAll(request, response) {
     try {
-      const recipes = await Recipe.findAll();
-      response.status(200).json(recipes);
+      const comments = await Comment.findAll();
+      response.status(200).json(comments);
     } catch (error) {
       console.log(error);
       response.status(400).send(error);
@@ -12,7 +12,7 @@ module.exports = {
   },
   async add(request, response) {
     try {
-      await Recipe.create(request.body);
+      await Comment.create(request.body);
       response.status(200).json("product inserted!!");
     } catch (error) {
       console.log(error);
@@ -21,13 +21,13 @@ module.exports = {
   },
   async get(request, response) {
     try {
-      const id = request.params.recipe_id;
-      const recipe = await Recipe.findOne({ where: { id } });
+      const id = request.params.comment_id;
+      const comment = await Comment.findOne({ where: { id } });
 
-      if (!recipe) {
+      if (!comment) {
         return response.status(400).json("Product not found");
       }
-      response.status(200).json(recipe);
+      response.status(200).json(comment);
     } catch (error) {
       console.log(error);
       response.status(400).send(error);
@@ -35,19 +35,19 @@ module.exports = {
   },
   async update(request, response) {
     try {
-      const { name, image, body, user_id } = request.body;
-      const id = request.params.recipe_id;
-      const recipe = await Recipe.findOne({ where: { id } });
+      const { text, user_id, recipe_id } = request.body;
+      const id = request.params.comment_id;
+      const comment = await Comment.findOne({ where: { id } });
 
-      if (!recipe) {
+      if (!comment) {
         return response.status(400).json("Product not found");
       }
-      recipe.name = name;
-      recipe.image = image,
-      recipe.body = body,
-      recipe.user_id = user_id,
 
-      await recipe.save();
+      comment.text = text;
+      comment.user_id = user_id,
+      comment.recipe_id = recipe_id,
+
+      await comment.save();
       response.status(200).json("product uptated!!");
     } catch (error) {
       console.log(error);
@@ -56,9 +56,9 @@ module.exports = {
   },
   async remove(request,response){
     try {
-      const id = request.params.recipe_id;
-      const recipe = await Recipe.destroy({ where: { id } });
-      if (!recipe) {
+      const id = request.params.comment_id;
+      const comment = await Comment.destroy({ where: { id } });
+      if (!comment) {
         return response.status(400).json("Product not found");
       }
       response.status(200).json("product removed!!");
