@@ -6,12 +6,15 @@ class Comment extends Model{};
 Comment.init({
   text: {
     type: DataTypes.TEXT,
+    allowNull: false
   },
   user_id: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    allowNull: false
   },
   recipe_id: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    allowNull: false
   },
 }, { 
     sequelize,
