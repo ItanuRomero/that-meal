@@ -1,5 +1,9 @@
 const app = require("./app.js");
+const sequelize = require("./src/api/repositories/database/database");
 require("dotenv").config();
+
+
+sequelize.sync().then(() => console.log());
 
 const port = process.env.SERVER_PORT || 8080;
 
