@@ -285,8 +285,8 @@ paths:
               example: Nota criada
         '401':
           description: Não permitido
-        '404':
-          description: Não encontrado
+        '400':
+          description: bad input parameter
   /comment/{recipe_id}:
     get:
       summary: Busca todos os comentários de uma receita
@@ -331,8 +331,8 @@ paths:
               example: Comentário criado
         '401':
           description: Não permitido
-        '404':
-          description: Não encontrado
+        '400':
+          description: bad input parameter
   /favourites:
     get:
       summary: Busca todas as receitas favoritas do usuário
@@ -477,7 +477,7 @@ components:
         - name
         - image
         - body
-        - createdBy
+        - user_id
         - createdAt
         - updatedAt
       properties:
@@ -494,38 +494,47 @@ components:
         body:
           type: string
           example: 'Texto com modo de preparo'
-        createdBy:
-          $ref: '#/components/schemas/User'
+        user_id:
+          type: number
+          example: 1
     Recipe-Tags:
       properties:
-        recipe:
-          $ref: '#/components/schemas/Recipe'
-        tag:
-           $ref: '#/components/schemas/Tag'
+        recipe_id:
+          type: number
+          example: 1
+        tag_id:
+          type: number
+          example: 1
     Rating:
       properties:
         rating: 
           type: integer
           example: 5
-        createdBy:
-          $ref: '#/components/schemas/User'
-        recipe:
-          $ref: '#/components/schemas/Recipe'
+        user_id:
+          type: number
+          example: 1
+        recipe_id:
+          type: number
+          example: 1
     Comment:
       properties:
         text: 
           type: string
           example: Muito boa a receita!!!
-        createdBy:
-          $ref: '#/components/schemas/User'
-        recipe:
-          $ref: '#/components/schemas/Recipe'
+        user_id:
+          type: number
+          example: 1
+        recipe_id:
+          type: number
+          example: 1
     Favourites:
       properties:
-        user:
-          $ref: '#/components/schemas/User'
-        recipe:
-           $ref: '#/components/schemas/Recipe'
+        user_id:
+          type: number
+          example: 1
+        recipe_id:
+          type: number
+          example: 1
     Tag:
       properties:
         name:
