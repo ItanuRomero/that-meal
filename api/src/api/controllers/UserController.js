@@ -12,9 +12,9 @@ module.exports = {
   },
   async add(request, response) {
     try {
-      await User.create(request.body);
+      const user = await User.create(request.body);
 
-      response.status(200).json("product inserted!!");
+      response.status(201).json(user);
     } catch (error) {
       response.status(400).send(error);
     }
@@ -25,7 +25,7 @@ module.exports = {
       const user = await User.findOne({ where: { id } });
 
       if (!user) {
-        return response.status(400).json("Product not found");
+        return response.status(404).json("Usuário não encontrado");
       }
 
       response.status(200).json(user);
@@ -40,7 +40,7 @@ module.exports = {
       const user = await User.findOne({ where: { id } });
 
       if (!user) {
-        return response.status(400).json("Product not found");
+        return response.status(404).json("Usuário não encontrado");
       }
 
       user.username = username;
@@ -54,7 +54,7 @@ module.exports = {
       user.isActive = isActive;
 
       await user.save();
-      response.status(200).json("product uptated!!");
+      response.status(201).json("Usuário atualizado com sucesso");
     } catch (error) {
       response.status(400).send(error);
     }
@@ -65,10 +65,10 @@ module.exports = {
       const user = await User.destroy({ where: { id } });
 
       if (!user) {
-        return response.status(400).json("Product not found");
+        return response.status(404).json("Usuário não encontrado");
       }
 
-      response.status(200).json("product removed!!");
+      response.status(202).json("Usuário desativado com sucesso");
     } catch (error) {
       response.status(400).send(error);
     }

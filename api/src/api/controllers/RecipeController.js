@@ -12,9 +12,9 @@ module.exports = {
   },
   async add(request, response) {
     try {
-      await Recipe.create(request.body);
+      const recipe = await Recipe.create(request.body);
 
-      response.status(200).json("product inserted!!");
+      response.status(201).json(recipe);
     } catch (error) {
       response.status(400).send(error);
     }
@@ -25,7 +25,7 @@ module.exports = {
       const recipe = await Recipe.findOne({ where: { id } });
 
       if (!recipe) {
-        return response.status(400).json("Product not found");
+        return response.status(404).json("Receita não encontrada");
       }
 
       response.status(200).json(recipe);
@@ -40,7 +40,7 @@ module.exports = {
       const recipe = await Recipe.findOne({ where: { id } });
 
       if (!recipe) {
-        return response.status(400).json("Product not found");
+        return response.status(404).json("Receita não encontrada");
       }
 
       recipe.name = name;
@@ -49,7 +49,7 @@ module.exports = {
       recipe.user_id = user_id;
 
       await recipe.save();
-      response.status(200).json("product uptated!!");
+      response.status(202).json("Receita atualizada com sucesso");
     } catch (error) {
       response.status(400).send(error);
     }
@@ -60,10 +60,10 @@ module.exports = {
       const recipe = await Recipe.destroy({ where: { id } });
 
       if (!recipe) {
-        return response.status(400).json("Product not found");
+        return response.status(404).json("Receita não encontrada");
       }
 
-      response.status(200).json("product removed!!");
+      response.status(202).json("Receita deletada");
     } catch (error) {
       response.status(400).send(error);
     }

@@ -15,7 +15,7 @@ module.exports = {
     try {
       await Comment.create(request.body);
       
-      response.status(200).json("product inserted!!");
+      response.status(202).json("Comentário criadoa");
     } catch (error) {
       response.status(400).send(error);
     }

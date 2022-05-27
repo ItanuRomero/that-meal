@@ -14,8 +14,8 @@ module.exports = {
   async add(request, response) {
     try {
       await Favourite.create(request.body);
-      
-      response.status(200).json("product inserted!!");
+
+      response.status(202).json("Nota criada");
     } catch (error) {
       response.status(400).send(error);
     }
