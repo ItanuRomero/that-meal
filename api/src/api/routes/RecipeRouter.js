@@ -1,6 +1,6 @@
 const {Router} = require("express");
 
-const RecipeController = require("../controllers/RecipeController")
+const RecipeController = require("../controllers/RecipeController");
 
 const routes = Router();
 

@@ -1,6 +1,6 @@
 const {Router} = require("express");
 
-const FavouriteController = require("../controllers/FavouriteController")
+const FavouriteController = require("../controllers/FavouriteController");
 
 const routes = Router();
 
