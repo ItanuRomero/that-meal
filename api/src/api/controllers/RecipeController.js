@@ -1,44 +1,70 @@
-const RecipeService = require("../services/RecipeService");
+const Recipe = require("../repositories/database/model/Recipe");
 
 module.exports = {
-    listAll: function (req, res) {
-      RecipeService.getAllRecipes().then(recipes => {
-        res.statusCode = 200;
-        res.set("Content-Type", "application/json");
-        res.send(JSON.stringify(recipes));
-      })
-    },
-
-    add: function (req, res) {
-      RecipeService.addNewRecipe(req.body).then((status) => {
-        res.statusCode = status.codeStatus;
-        res.set("Content-Type", "application/json");
-        res.send(JSON.stringify(status.status));
-      });
-    },
-
-    get: function (req, res) {
-      const recipeId = req.params.recipe_id;
-      RecipeService.getRecipeById(recipeId).then((status) => {
-        res.statusCode = status.codeStatus;
-        res.set("Content-Type", "application/json");
-        res.send(JSON.stringify(status.status));                    
-      });
-    },
-
-    update: function (req, res) {
-      RecipeService.updateRecipe(req.body, req.params.recipe_id).then((status) => {
-        res.statusCode = status.codeStatus;
-        res.set("Content-Type", "application/json");
-        res.send(JSON.stringify(status.status));
-      });
-    },
-
-    remove: function (req, res) {
-      RecipeService.removeRecipeById(req.params.recipe_id).then((status) => {
-        res.statusCode = status.codeStatus;
-        res.set("Content-Type", "application/json");
-        res.send(JSON.stringify(status.status));
-      });
+  async listAll(request, response) {
+    try {
+      const recipes = await Recipe.findAll();
+      response.status(200).json(recipes);
+    } catch (error) {
+      console.log(error);
+      response.status(400).send(error);
     }
-}
+  },
+  async add(request, response) {
+    try {
+      await Recipe.create(request.body);
+      response.status(200).json("product inserted!!");
+    } catch (error) {
+      console.log(error);
+      response.status(400).send(error);
+    }
+  },
+  async get(request, response) {
+    try {
+      const id = request.params.recipe_id;
+      const recipe = await Recipe.findOne({ where: { id } });
+
+      if (!recipe) {
+        return response.status(400).json("Product not found");
+      }
+      response.status(200).json(recipe);
+    } catch (error) {
+      console.log(error);
+      response.status(400).send(error);
+    }
+  },
+  async update(request, response) {
+    try {
+      const { name, image, body, createdBy } = request.body;
+      const id = request.params.recipe_id;
+      const recipe = await Recipe.findOne({ where: { id } });
+
+      if (!recipe) {
+        return response.status(400).json("Product not found");
+      }
+      recipe.name = name;
+      recipe.image = image,
+      recipe.body = body,
+      recipe.createdBy = createdBy,
+
+      await recipe.save();
+      response.status(200).json("product uptated!!");
+    } catch (error) {
+      console.log(error);
+      response.status(400).send(error);
+    }
+  },
+  async remove(request,response){
+    try {
+      const id = request.params.recipe_id;
+      const recipe = await Recipe.destroy({ where: { id } });
+      if (!recipe) {
+        return response.status(400).json("Product not found");
+      }
+      response.status(200).json("product removed!!");
+    } catch (error) {
+      console.log(error);
+      response.status(400).send(error);
+    }
+  }
+};
