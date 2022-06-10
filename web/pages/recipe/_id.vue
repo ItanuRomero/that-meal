@@ -31,17 +31,17 @@ export default {
     NavbarComponent
   },
   async asyncData({ $axios, params }) {
-        try {
-          const recipe = await $axios.$get(`recipe/${params.id}`);
-          if (recipe.createdBy) {
-            recipe.createdBy = {username: recipe.createdBy.username}
-          }
-          return { recipe };
-        } catch (ex) {
-            console.log(ex);
-            return { recipe: false}
-        }
+    try {
+      const recipe = await $axios.$get(`recipe/${params.id}`);
+      if (recipe.createdBy) {
+        recipe.createdBy = {username: recipe.createdBy.username}
+      }
+      return { recipe };
+    } catch (ex) {
+        console.log(ex);
+        return { recipe: false}
     }
+  }
 }
 </script>
 

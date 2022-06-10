@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import HeaderComponent from '../components/header.vue'
-import NavbarComponent from '../components/navbar.vue'
-import ButtonAddRecipeComponent from "../components/recipe/button-add-recipe.vue"
-import RecipeCard from "../components/recipe/recipeCard.vue"
+import HeaderComponent from '../../components/header.vue'
+import NavbarComponent from '../../components/navbar.vue'
+import ButtonAddRecipeComponent from "../../components/recipe/button-add-recipe.vue"
+import RecipeCard from "../../components/recipe/recipeCard.vue"
 export default {
-  name: 'IndexPage',
+  name: 'RecipesPage',
   components: {
     HeaderComponent,
     NavbarComponent,
@@ -42,8 +42,8 @@ export default {
           const recipes = await $axios.$get('recipe');
           return { recipes };
         } catch (ex) {
-          console.log(ex);
-          return { recipes: false}
+            console.log(ex);
+            return { recipes: false}
         }
     }
 }
