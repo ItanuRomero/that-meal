@@ -15,6 +15,7 @@ module.exports = {
 
   async getUserById(userId){
     const dbConnect = dbo.getDb();
+
     return await dbConnect
       .collection(collName)
       .findOne(
@@ -24,7 +25,46 @@ module.exports = {
         );
   },
 
-  async getByUsername(username) {
+  async updateUserById(user, userId){
+    const dbConnect = dbo.getDb();
+    console.log('lixo');
+    const a = await dbConnect
+      .collection(collName)
+      .updateOne(
+        {
+          _id: ObjectId(userId)
+        },
+        {
+          $set: {
+            username : user.username,
+            email : user.email,
+            password : user.password,
+            phone : user.phone,
+            birth : user.birth,
+            isAdmin : user.isAdmin,
+            isActive : user.isActive,
+          }
+        },
+      );
+
+      console.log(a);
+
+      return a;
+  },
+
+  async deleteUserById(userId){
+    const dbConnect = dbo.getDb();
+    
+    return await dbConnect
+      .collection(collName)
+      .deleteOne(
+          {
+            _id: ObjectId(userId)
+          }
+        );
+  },
+
+  async getByUsername(username){
     const dbConnect = dbo.getDb();
 
     return await dbConnect
