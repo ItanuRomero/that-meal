@@ -15,6 +15,9 @@
         <b-card-text>
             {{recipe.body}}
         </b-card-text>
+        <b-card-text>
+            {{user}}
+        </b-card-text>
       </b-card>
     </b-container>
     </main>
@@ -33,10 +36,12 @@ export default {
   async asyncData({ $axios, params }) {
     try {
       const recipe = await $axios.$get(`recipe/${params.id}`);
-      if (recipe.createdBy) {
-        recipe.createdBy = {username: recipe.createdBy.username}
+      let user = await $axios.$get(`user/${recipe.user_id}`)
+      user = {
+        name: user.username,
+        isActive: user.isActive
       }
-      return { recipe };
+      return { recipe, user };
     } catch (ex) {
         console.log(ex);
         return { recipe: false}
