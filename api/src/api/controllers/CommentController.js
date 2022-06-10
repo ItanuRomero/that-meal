@@ -15,7 +15,7 @@ module.exports = {
     try {
       await Comment.create(request.body);
       
-      response.status(202).json("Comentário criadoa");
+      response.status(202).json("Comentário criado");
     } catch (error) {
       response.status(400).send(error);
     }
