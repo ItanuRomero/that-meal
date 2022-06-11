@@ -27,8 +27,7 @@ module.exports = {
 
   async updateUserById(user, userId){
     const dbConnect = dbo.getDb();
-    console.log('lixo');
-    const a = await dbConnect
+    return await dbConnect
       .collection(collName)
       .updateOne(
         {
@@ -46,10 +45,6 @@ module.exports = {
           }
         },
       );
-
-      console.log(a);
-
-      return a;
   },
 
   async deleteUserById(userId){
@@ -58,10 +53,10 @@ module.exports = {
     return await dbConnect
       .collection(collName)
       .deleteOne(
-          {
-            _id: ObjectId(userId)
-          }
-        );
+        {
+          _id: ObjectId(userId)
+        }
+      );
   },
 
   async getByUsername(username){
