@@ -20,12 +20,12 @@
               placeholder="Senha"
               trim
             ></b-form-input>
-            <NuxtLink to="/redefinirSenha"
+            <NuxtLink to="/esqueci-minha-senha"
               ><h4 id="esqueciMinhaSenha">Esqueci minha senha</h4></NuxtLink
             >
             <b-button block variant="primary" id="LoginButton">Login</b-button>
             <h4 id="h4CrieUmaConta">
-              Não tem uma conta?<NuxtLink to="/signup">
+              Não tem uma conta?<NuxtLink to="/crie-uma-conta">
                 Crie uma</NuxtLink
               >
             </h4>
