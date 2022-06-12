@@ -15,6 +15,15 @@
         <b-card-text>
             {{recipe.body}}
         </b-card-text>
+        <b-card-text>
+            {{user}}
+        </b-card-text>
+        <b-card-text>
+            {{comments}}
+        </b-card-text>
+        <b-card-text>
+            {{favourites.length}}
+        </b-card-text>
       </b-card>
     </b-container>
     </main>
@@ -31,17 +40,21 @@ export default {
     NavbarComponent
   },
   async asyncData({ $axios, params }) {
-        try {
-          const recipe = await $axios.$get(`recipe/${params.id}`);
-          if (recipe.createdBy) {
-            recipe.createdBy = {username: recipe.createdBy.username}
-          }
-          return { recipe };
-        } catch (ex) {
-            console.log(ex);
-            return { recipe: false}
-        }
+    try {
+      const recipe = await $axios.$get(`recipe/${params.id}`);
+      let user = await $axios.$get(`user/${recipe.user_id}`);
+      user = {
+        name: user.username,
+        isActive: user.isActive
+      }
+      const comments = await $axios.$get(`comment/${params.id}`);
+      const favourites = await $axios.$get(`favourite/${params.id}`);
+      return { recipe, user, comments, favourites};
+    } catch (ex) {
+        console.log(ex);
+        return { recipe: false}
     }
+  }
 }
 </script>
 
