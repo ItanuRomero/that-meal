@@ -16,7 +16,7 @@
     "helmet": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
     "sequelize": "^6.20.1",
-    "sqlite": "^4.1.1"
+    "sqlite3": "^5.0.8"
   },
   "devDependencies": {
     "jest": "^28.1.0",
