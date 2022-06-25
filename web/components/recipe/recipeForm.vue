@@ -16,15 +16,6 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-3" label="Categoria" label-for="input-3">
-        <b-form-select
-          id="input-3"
-          v-model="form.category"
-          :options="categories"
-          required
-        ></b-form-select>
-      </b-form-group>
-
       <b-form-group id="input-group-2" label="Modo de preparo" label-for="input-2">
         <b-form-textarea
             id="textarea"
@@ -59,10 +50,8 @@
         form: {
           name: '',
           body: '',
-          categories: null,
-          images: []
+          images: ''
         },
-        categories: [{ text: 'Selecione uma categoria', value: null }, 'Suco', 'Massas', 'Básicos', 'Outros'],
         show: true
       }
     },
@@ -70,22 +59,10 @@
       onSubmit(event) {
         event.preventDefault()
         this.$axios.post('recipe', {
-                  id: 10,
-                  name: this.name,
-                  body: this.body,
-                  image: this.images,
-                  createdBy: {
-                    id: 3,
-                    email: "example@example.com",
-                    username: "MyUsername",
-                    birth: "2016-08-29T09:12:33.001Z",
-                    phone: "(11)99999-9999",
-                    password: "string hash",
-                    createdAt: "2016-08-29T09:12:33.001Z",
-                    updatedAt: "2016-08-29T09:12:33.001Z",
-                    isAdmin: true,
-                    isActive: true
-                  }
+          name: this.name,
+          body: this.body,
+          image: this.images,
+          user_id: 1
         })
         .then(function (response) {
             console.log(response);
@@ -96,12 +73,9 @@
       },
       onReset(event) {
         event.preventDefault()
-        // Reset our form values
         this.form.email = ''
         this.form.name = ''
-        this.form.categories = null
-        this.form.images = []
-        // Trick to reset/clear native browser form validation state
+        this.form.images = ''
         this.show = false
         this.$nextTick(() => {
           this.show = true
