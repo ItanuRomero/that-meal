@@ -5,30 +5,14 @@
         <b-col id="colLogin">
           <div role="group">
             <label for="input-live"><h3>Entrar:</h3></label>
-            <b-form-input
-              id="input-live"
-              aria-describedby="input-live-help input-live-feedback"
-              placeholder="E-mail"
-              trim
-            ></b-form-input>
+            <b-form-input id="input-live" aria-describedby="input-live-help input-live-feedback" placeholder="E-mail" trim></b-form-input>
           </div>
-          <br />
+          <br/>
           <div role="group">
-            <b-form-input
-              id="input-live"
-              aria-describedby="input-live-help input-live-feedback"
-              placeholder="Senha"
-              trim
-            ></b-form-input>
-            <NuxtLink to="/redefinirSenha"
-              ><h4 id="esqueciMinhaSenha">Esqueci minha senha</h4></NuxtLink
-            >
+            <b-form-input id="input-live" aria-describedby="input-live-help input-live-feedback" placeholder="Senha" trim></b-form-input>
+            <NuxtLink to="/redefinirSenha"><h4 id="esqueciMinhaSenha" style="margin: 5px">Esqueci minha senha</h4></NuxtLink>
             <b-button block variant="primary" id="LoginButton">Login</b-button>
-            <h4 id="h4CrieUmaConta">
-              Não tem uma conta?<NuxtLink to="/signup">
-                Crie uma</NuxtLink
-              >
-            </h4>
+            <h4 id="h4CrieUmaConta" style="margin: 5px">Não tem uma conta? <NuxtLink to="/signup"  style="padding-left: 3px;">Crie agora.</NuxtLink></h4>
           </div>
         </b-col>
         <b-col align-self="stretch">
@@ -51,6 +35,9 @@ export default {
 <style>
 #LoginButton {
   background-color: #ffc452 !important;
+  border-color: #ffc452 !important;
+  border-radius: 3px;
+
 }
 
 #colLogin {
@@ -84,9 +71,10 @@ export default {
   height: 100%;
   width: 100%;
   background: url('~assets/logo.png') no-repeat;
-  background-position: center;
+  background-position: right !important;
   background-color: #ffc452;
 }
+
 #rowLogin {
   height: 100vh;
 }
@@ -104,7 +92,7 @@ export default {
   position: absolute;
   bottom: 0;
   right: 0;
-  padding-bottom: 40%;
+  padding-bottom: 20% !important;
   padding-right: 5%;
 }
 </style>

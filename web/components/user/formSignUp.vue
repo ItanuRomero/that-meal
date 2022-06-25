@@ -5,65 +5,31 @@
         <b-col id="colCriarConta">
           <div role="group">
             <label for="input-live"><h3>Criar Conta:</h3></label>
-            <b-form-input
-              id="input-live"
-              aria-describedby="input-live-help input-live-feedback"
-              placeholder="Nome Completo"
-              trim
-            ></b-form-input>
+            <b-form-input id="input-live" aria-describedby="input-live-help input-live-feedback" placeholder="Nome Completo" trim></b-form-input>
           </div>
           <br />
           <div role="group">
-            <b-form-input
-              id="input-live"
-              aria-describedby="input-live-help input-live-feedback"
-              placeholder="Data de Nascimento"
-              trim
-            ></b-form-input>
+            <b-form-input id="input-live" aria-describedby="input-live-help input-live-feedback" placeholder="Data de Nascimento" trim></b-form-input>
             <br>
-          <div role="group">
-            <b-form-input
-              id="input-live"
-              aria-describedby="input-live-help input-live-feedback"
-              placeholder="Número de Telefone"
-              trim
-            ></b-form-input>
-          </div>
-          <br>                      
-          <div role="group">
-            <b-form-input
-              id="input-live"
-              aria-describedby="input-live-help input-live-feedback"
-              placeholder="E-mail"
-              trim
-            ></b-form-input>
-          </div>
-          <br>  
-          <div role="group">
-            <b-form-input
-              id="input-live"
-              aria-describedby="input-live-help input-live-feedback"
-              placeholder="Confirmação de E-mail"
-              trim
-            ></b-form-input>
-          </div>
-          <br>  
-          <div role="group">
-            <b-form-input
-              id="input-live"
-              aria-describedby="input-live-help input-live-feedback"
-              placeholder="Senha"
-              trim
-            ></b-form-input>
-          </div>
-          <br>                                                                                            
+            <div role="group">
+              <b-form-input id="input-live" aria-describedby="input-live-help input-live-feedback" placeholder="Número de Telefone" trim></b-form-input>
+            </div>
+            <br>
+            <div role="group">
+              <b-form-input id="input-live" aria-describedby="input-live-help input-live-feedback" placeholder="E-mail" trim></b-form-input>
+            </div>
+            <br>
+            <div role="group">
+              <b-form-input id="input-live" aria-describedby="input-live-help input-live-feedback" placeholder="Confirmação de E-mail" trim></b-form-input>
+            </div>
+            <br>
+            <div role="group">
+              <b-form-input id="input-live" aria-describedby="input-live-help input-live-feedback" placeholder="Senha" trim></b-form-input>
+            </div>
+            <br>
             <b-button block variant="primary" id="CriarContaButton">Criar Conta</b-button>
-            <h4 id="h4FazerLogin">
-              Já tem uma conta? <NuxtLink to="/login">
-                Fazer Login.</NuxtLink
-              >
-            </h4>
-          </div>          
+            <h4 id="h4FazerLogin" style="margin: 5px">Já tem uma conta? <NuxtLink to="/login" style="padding-left: 3px;">Fazer Login.</NuxtLink></h4>
+          </div>
         </b-col>
         <b-col align-self="stretch">
           <div id="imgLogin">
@@ -85,10 +51,12 @@ export default {
 <style>
 #CriarContaButton {
   background-color: #ffc452 !important;
+  border-color: #ffc452 !important;
+  border-radius: 3px;
 }
 
 #colCriarConta {
-  margin-top: 15%;
+  margin-top: 5%;
   margin-right: 10%;
   margin-left: 10%;
 }

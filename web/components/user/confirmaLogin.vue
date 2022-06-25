@@ -1,15 +1,13 @@
 <template>
   <div>
     <b-container id="ContainerLogin">
-      <b-row align-v="start" id="rowRedefinirSenha">
-        <b-col id="colRedefinirSenha">
+      <b-row align-v="start" id="rowConfirmacaoRedefinir">
+        <b-col id="colConfirmacaoRedefinir">
           <div role="group">
-            <label for="input-live"><h3>Redefinir Senha:</h3></label>
-            <b-form-input id="input-live" aria-describedby="input-live-help input-live-feedback" placeholder="Digite seu E-mail" trim></b-form-input>
+            <h4>Um e-mail com instruções para redefinir sua senha foi enviado para você 🎉</h4>
           </div>
           <br>
           <b-button block variant="primary" id="ConfirmarButton">Confirmar</b-button>
-          <h4 id="h4Voltar"><NuxtLink to="/login" style="margin: 2px">Voltar ao início.</NuxtLink></h4>
         </b-col>
         <b-col align-self="stretch">
           <div id="imgLogin">
@@ -24,7 +22,7 @@
 
 <script>
 export default {
-  name: 'FormRedefinirSenha',
+  name: 'FormConfirmacaoRedefinir',
 }
 </script>
 
@@ -35,7 +33,7 @@ export default {
   border-radius: 3px;
 }
 
-#colRedefinirSenha {
+#colConfirmacaoRedefinir {
   margin-top: 15%;
   margin-right: 10%;
   margin-left: 10%;
@@ -52,7 +50,7 @@ export default {
   background-position: center;
   background-color: #ffc452;
 }
-#rowRedefinirSenha {
+#rowConfirmacaoRedefinir {
   height: 100vh;
 }
 
