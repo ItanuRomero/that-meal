@@ -1,6 +1,6 @@
 <template>
 <div>
-<b-form @submit="onSubmit" @reset="onReset" v-if="show">
+<b-form @submit="onSubmit" @reset="onReset" v-if="show" id="new-recipe-form">
       <b-form-group
         id="input-group-1"
         label="Nome"
@@ -40,18 +40,8 @@
       ></b-form-input>
     </b-form-group>
 
-    <b-form-group id="input-group-2" label="Imagem da receita:" label-for="input-2">
-        <b-form-file
-            v-model="form.image"
-            :state="Boolean(form.image)"
-            placeholder="Escolha uma foto bem bonita pra gente mostrar"
-            drop-placeholder="Pode soltar sua foto aqui!"
-        ></b-form-file>
-        <div class="mt-3">Selected file: {{ form.image ? form.image.name : '' }}</div>
-    </b-form-group>
-
-      <b-button type="submit" variant="primary">Criar Receita</b-button>
-      <b-button type="reset" variant="danger">Descartar</b-button>
+    <b-button type="submit" variant="primary">Criar Receita</b-button>
+    <b-button type="reset" variant="danger">Descartar</b-button>
     </b-form>
 
 </div>
