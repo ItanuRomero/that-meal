@@ -22,17 +22,32 @@
             v-model="form.body"
             placeholder="Coloque aqui o passo a passo da sua receita"
             rows="3"
-            max-rows="6"
+            max-rows="30"
         ></b-form-textarea>
       </b-form-group>
+
+    <b-form-group
+      id="input-group-1"
+      label="Url da imagem"
+      label-for="input-1"
+      description="Coloque uma url ou faça o upload"
+    >
+      <b-form-input
+        id="input-1"
+        v-model="form.image"
+        type="text"
+        required
+      ></b-form-input>
+    </b-form-group>
+
     <b-form-group id="input-group-2" label="Imagem da receita:" label-for="input-2">
         <b-form-file
-            v-model="form.images"
-            :state="Boolean(form.images)"
+            v-model="form.image"
+            :state="Boolean(form.image)"
             placeholder="Escolha uma foto bem bonita pra gente mostrar"
             drop-placeholder="Pode soltar sua foto aqui!"
         ></b-form-file>
-        <div class="mt-3">Selected file: {{ form.images ? form.images.name : '' }}</div>
+        <div class="mt-3">Selected file: {{ form.image ? form.image.name : '' }}</div>
     </b-form-group>
 
       <b-button type="submit" variant="primary">Criar Receita</b-button>
@@ -50,7 +65,7 @@
         form: {
           name: '',
           body: '',
-          images: ''
+          image: ''
         },
         show: true
       }
@@ -61,7 +76,7 @@
         this.$axios.post('recipe', {
           name: this.name,
           body: this.body,
-          image: this.images,
+          image: this.image,
           user_id: 1
         })
         .then(function (response) {
@@ -75,7 +90,7 @@
         event.preventDefault()
         this.form.email = ''
         this.form.name = ''
-        this.form.images = ''
+        this.form.image = ''
         this.show = false
         this.$nextTick(() => {
           this.show = true

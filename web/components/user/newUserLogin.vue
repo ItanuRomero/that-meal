@@ -1,9 +1,9 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form @submit="onSubmit" @reset="onReset" v-if="show" id="new-user-form">
       <b-form-group
         id="input-group-1"
-        label="Nome"
+        label="Nome:"
         label-for="input-1"
         description="Insira seu nome"
       >
@@ -32,8 +32,8 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Criar Receita</b-button>
-      <b-button type="reset" variant="danger">Descartar</b-button>
+      <b-button type="submit" variant="primary">Criar Cadastro</b-button>
+      <b-button type="reset" variant="danger">Cancelar</b-button>
     </b-form>
   </div>
 </template>
@@ -80,3 +80,7 @@
     }
   }
 </script>
+
+<style>
+
+</style>

@@ -27,7 +27,6 @@ export default {
   main {
     height: 100vh;
     width: 100vw;
-   
   }
   #background {
     margin-top: 1rem;
@@ -37,8 +36,8 @@ export default {
     background-size: contain;
     background-position: center;
   }
-  form {
+  #new-user-form {
     width: 80%;
-    margin: auto;
+    margin: 2rem auto 0 auto;
   }
 </style>
