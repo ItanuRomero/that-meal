@@ -2,19 +2,34 @@
   <div>
     <b-container id="ContainerLogin">
       <b-row align-v="start" id="rowLogin">
-        <b-col id="colLogin">
-          <div role="group">
-            <label for="input-live"><h3>Entrar:</h3></label>
-            <b-form-input id="input-live" aria-describedby="input-live-help input-live-feedback" placeholder="E-mail" trim></b-form-input>
-          </div>
-          <br/>
-          <div role="group">
-            <b-form-input id="input-live" aria-describedby="input-live-help input-live-feedback" placeholder="Senha" trim></b-form-input>
+        <b-form @submit="onSubmit" @reset="onReset" v-if="show" id="login-form">
+          <b-col id="colLogin">
+            <b-form-group
+              id="input-group-1"
+              label="Nome:"
+              label-for="input-1"
+              description="Insira seu nome"
+            >
+              <b-form-input
+                id="input-1"
+                v-model="form.username"
+                type="text"
+                required
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-2" label="Senha: " label-for="input-2">
+              <b-form-input
+                  id="input-2"
+                  v-model="form.password"
+                  type="password"
+              ></b-form-input>
+            </b-form-group>
             <NuxtLink to="/redefinirSenha"><h4 id="esqueciMinhaSenha" style="margin: 5px">Esqueci minha senha</h4></NuxtLink>
-            <b-button block variant="primary" id="LoginButton">Login</b-button>
+            <b-button  type="submit" variant="primary" id="LoginButton">Login</b-button>
             <h4 id="h4CrieUmaConta" style="margin: 5px">Não tem uma conta? <NuxtLink to="/signup"  style="padding-left: 3px;">Crie agora.</NuxtLink></h4>
-          </div>
-        </b-col>
+          </b-col>
+        </b-form>
         <AsideComponent></AsideComponent>
       </b-row>
     </b-container>
@@ -27,7 +42,45 @@ export default {
   name: 'FormLogin',
   components:{
     AsideComponent
-  }
+  },
+  data() {
+      return {
+        form: {
+          username: '',
+          password: '',
+        },
+        show: true
+      }
+    },
+    methods: {
+      onSubmit(event) {
+        const self = this
+        event.preventDefault()
+        this.$axios.post('http://localhost:5000/login', {
+          username: this.form.username,
+          password: this.form.password
+        })
+        .then(function (response) {
+          console.log(response.data.token);
+          document.cookie = `token=${response.data.token}`;
+          self.$router.push('/');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      },
+      onReset(event) {
+        event.preventDefault()
+        // Reset our form values
+        this.form.username = ''
+        this.form.password = ''
+        // Trick to reset/clear native browser form validation state
+        this.show = false
+        this.$nextTick(() => {
+          this.show = true
+        })
+      }
+    }
 }
 </script>
 
