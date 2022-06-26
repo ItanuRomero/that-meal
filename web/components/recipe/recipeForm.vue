@@ -63,11 +63,13 @@
     methods: {
       onSubmit(event) {
         event.preventDefault()
+        this.$axios.setHeader('Authorization', `Bearer ${this.$getCookie('token')}`);
+        const self = this;
         this.$axios.post('recipe', {
-          name: this.name,
-          body: this.body,
-          image: this.image,
-          user_id: 1
+          name: this.form.name,
+          image: this.form.image,
+          body: this.form.body,
+          user_id: self.$getCookie('user_id')
         })
         .then(function (response) {
             console.log(response);
