@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import FormSignUp from "../components/user/FormSignUp.vue"
+import FormSignUp from "../components/user/formSignUp.vue"
 export default {
   name: 'IndexPage',
   components:{

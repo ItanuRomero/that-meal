@@ -31,20 +31,19 @@
             <h4 id="h4FazerLogin" style="margin: 5px">Já tem uma conta? <NuxtLink to="/login" style="padding-left: 3px;">Fazer Login.</NuxtLink></h4>
           </div>
         </b-col>
-        <b-col align-self="stretch">
-          <div id="imgLogin">
-            <h4 id="textThatMeal">that.meal</h4>
-            <h4 id="textDescrubra">Descubra temperos<br />incríveis</h4>
-          </div>
-        </b-col>
+        <AsideComponent></AsideComponent>
       </b-row>
     </b-container>
   </div>
 </template>
 
 <script>
+import AsideComponent from "./asideAuth.vue"
 export default {
   name: 'FormSignUp',
+  components:{
+    AsideComponent
+  }
 }
 </script>
 

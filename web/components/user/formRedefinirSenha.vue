@@ -11,20 +11,19 @@
           <b-button block variant="primary" id="ConfirmarButton">Confirmar</b-button>
           <h4 id="h4Voltar"><NuxtLink to="/login" style="margin: 2px">Voltar ao início.</NuxtLink></h4>
         </b-col>
-        <b-col align-self="stretch">
-          <div id="imgLogin">
-            <h4 id="textThatMeal">that.meal</h4>
-            <h4 id="textDescrubra">Descubra temperos<br />incríveis</h4>
-          </div>
-        </b-col>
+        <AsideComponent></AsideComponent>
       </b-row>
     </b-container>
   </div>
 </template>
 
 <script>
+import AsideComponent from "./asideAuth.vue"
 export default {
   name: 'FormRedefinirSenha',
+  components:{
+    AsideComponent
+  }
 }
 </script>
 

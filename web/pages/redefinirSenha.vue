@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import FormRedefinirSenha from "../components/user/FormRedefinirSenha.vue"
+import FormRedefinirSenha from "../components/user/formRedefinirSenha.vue"
 export default {
   name: 'IndexPage',
   components:{

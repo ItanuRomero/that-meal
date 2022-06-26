@@ -37,4 +37,8 @@ export default {
     background-size: contain;
     background-position: center;
   }
+  form {
+    width: 80%;
+    margin: auto;
+  }
 </style>
