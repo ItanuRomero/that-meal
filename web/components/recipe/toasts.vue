@@ -158,5 +158,9 @@ export default {
     width: 100%;
     padding: 2px;
   }
-
+@media (min-width: 1200px) {
+  .container {
+    display: block;
+  }
+}
 </style>

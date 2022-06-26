@@ -1,0 +1,542 @@
+openapi: 3.0.0
+servers:
+  - description: None
+    url: none
+info:
+  description: API Docs for that meal web app
+  version: "0.0.1"
+  title: that.meal API
+  contact:
+    email: itanu.romero@aluno.ifsp.edu.br
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: user
+    description: All user related endpoints
+  - name: recipe
+    description: All recipe related endpoints
+  - name: rating
+    description: All rating related endpoints
+  - name: comment
+    description: All comment related endpoints
+  - name: favourites
+    description: All favourites related endpoints
+  - name: tags
+    description: All tags related endpoints
+paths:
+  /user:
+    get:
+      summary: Busca todos os usuários registrados
+      tags:
+        - user
+      description: |
+        Listagem de todos os usuários registrados na plataforma caso o usuário for administrador, caso não, apenas mostra seu usuário
+      responses:
+        '200':
+          description: Retorno de usuário
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      summary: Adiciona um novo usuário ao sistema / Registra usuário
+      tags:
+        - user
+      description: Registra usuário
+      responses:
+        '201':
+          description: Novo usuário cadastrado
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: 'DB: invalid input, object invalid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: Dado de inventario a ser adicionado
+  /user/{user_id}:
+    get:
+      summary: Busca o usuário do ID informado
+      tags:
+        - user
+      description: |
+        Busca o usuário
+      parameters: 
+        - in: path
+          name: user_id
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Usuário encontrado
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '404':
+          description: Usuário não encontrado
+    delete:
+      summary: Remove o usuário do ID informado
+      tags:
+        - user
+      description: |
+        Deleta o usuário
+      parameters: 
+        - in: path
+          name: user_id
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Usuário desativado com sucesso
+          content:
+            application/text:
+              example: Usuário desativado com sucesso
+        '404':
+          description: Usuário não encontrado
+    put:
+      summary: Atualiza o usuário do ID informado
+      tags:
+        - user
+      description: |
+        Atualiza o usuário
+      parameters: 
+        - in: path
+          name: user_id
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Usuário atualizado com sucesso
+          content:
+            application/text:
+              example: Usuário atualizado com sucesso
+        '400':
+          description: invalid input, object invalid
+        '404':
+          description: Usuário não encontrado
+  /recipe:
+    get:
+      summary: Busca todas as receitas criadas
+      tags:
+        - recipe
+      description: |
+        Listagem de todas as receitas disponíveis na plataforma
+      responses:
+        '200':
+          description: Lista de receitas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+    post:
+      summary: Cria uma nova receita
+      tags:
+        - recipe
+      description: Registra receita | Add nova receita ao banco de dados
+      responses:
+        '201':
+          description: Nova receita cadastrada
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+        '400':
+          description: 'DB: invalid input, object invalid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+        description: Dado de inventario a ser adicionado
+  /recipe/{recipe_id}:
+    get:
+      summary: Busca a receita do ID informado
+      tags:
+        - recipe
+      description: |
+        Busca a receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Recipe ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Receita encontrada
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+        '404':
+          description: Receita não encontrada
+    delete:
+      summary: Remove a receita a partir de seu ID
+      tags:
+        - recipe
+      description: Remove receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Receita deletada
+          content:
+            application/text:
+              example: Receita deletada
+        '401':
+          description: Não permitido
+        '404':
+          description: Receita não encontrada
+    put:
+      summary: Atualiza a receita do ID informado
+      tags:
+        - recipe
+      description: Atualiza a receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Receita atualizada com sucesso
+          content:
+            application/text:
+              example: Receita atualizada com sucesso
+        '400':
+          description: 'DB: invalid input, object invalid'
+        '401':
+          description: Não permitido
+        '404':
+          description: Receita não encontrada
+  /rating/{recipe_id}:
+    get:
+      summary: Busca todas as notas de uma receita
+      tags:
+        - rating
+      description: Listagem de todas as notas a partir de uma receita
+      parameters: 
+      - in: path
+        name: recipe_id
+        description: Id da receita
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Lista de notas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rating'
+        '400':
+          description: bad input parameter
+    post:
+      summary: Cria uma nova nota
+      tags:
+        - rating
+      description: Adiciona uma nota a uma receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Nota criada
+          content:
+            application/text:
+              example: Nota criada
+        '401':
+          description: Não permitido
+        '400':
+          description: bad input parameter
+  /comment/{recipe_id}:
+    get:
+      summary: Busca todos os comentários de uma receita
+      tags:
+        - comment
+      description: Listagem de todos os comentários a partir de uma receita
+      parameters: 
+      - in: path
+        name: recipe_id
+        description: Id da receita
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Lista de comentários
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+        '400':
+          description: bad input parameter
+    post:
+      summary: Cria um novo comentário
+      tags:
+        - comment
+      description: Adiciona um comentário a uma receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Comentário criado
+          content:
+            application/text:
+              example: Comentário criado
+        '401':
+          description: Não permitido
+        '400':
+          description: bad input parameter
+  /favourites:
+    get:
+      summary: Busca todas as receitas favoritas do usuário
+      tags:
+        - favourites
+      description: Listagem das receitas favoritas do usuário logado
+      responses:
+        '200':
+          description: Lista de receitas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Favourites'
+        '400':
+          description: bad input parameter
+  /favourites/{recipe_id}:
+    post:
+      summary: Cria um novo favorito
+      tags:
+        - favourites
+      description: Adiciona um favorito a uma receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Favorito criado
+          content:
+            application/text:
+              example: favorito criado
+        '401':
+          description: Não permitido
+        '404':
+          description: Não encontrado
+  /tags/{recipe_id}:
+    get:
+      summary: Busca todas as tags da receita
+      tags:
+        - tags
+      description: Listagem das tags da receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de receitas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Favourites'
+        '400':
+          description: bad input parameter
+    post:
+      summary: Adiciona uma tag a uma receita
+      tags:
+        - tags
+      description: Adiciona uma tag a uma receita
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Id da receita
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Tag adicionada
+          content:
+            application/text:
+              example: Tag adicionada
+        '401':
+          description: Não permitido
+        '404':
+          description: Não encontrado
+
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - email
+        - username
+        - birth
+        - phone
+        - password
+        - createdAt
+        - updatedAt
+        - isAdmin
+        - isActive
+      properties:
+        id:
+          type: number
+          example: 1
+        email:
+          type: string
+          example: example@example.com
+        username:
+          type: string
+          example: MyUsername
+        birth:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+        phone:
+          type: string
+          example: '(11)99999-9999'
+        password:
+          type: string
+          example: string hash
+        createdAt:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+        isAdmin:
+          type: boolean
+          example: true
+        isActive:
+          type: boolean
+          example: true
+    Recipe:
+      type: object
+      required:
+        - id
+        - name
+        - image
+        - body
+        - user_id
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: Suco de maçã
+        image:
+          type: string
+          format: url
+          example: 'path/to/image'
+        body:
+          type: string
+          example: 'Texto com modo de preparo'
+        user_id:
+          type: number
+          example: 1
+    Recipe-Tags:
+      properties:
+        recipe_id:
+          type: number
+          example: 1
+        tag_id:
+          type: number
+          example: 1
+    Rating:
+      properties:
+        rating: 
+          type: integer
+          example: 5
+        user_id:
+          type: number
+          example: 1
+        recipe_id:
+          type: number
+          example: 1
+    Comment:
+      properties:
+        text: 
+          type: string
+          example: Muito boa a receita!!!
+        user_id:
+          type: number
+          example: 1
+        recipe_id:
+          type: number
+          example: 1
+    Favourites:
+      properties:
+        user_id:
+          type: number
+          example: 1
+        recipe_id:
+          type: number
+          example: 1
+    Tag:
+      properties:
+        name:
+          type: string
+          example: Suco
