@@ -29,4 +29,10 @@ export default {
     width: auto;
     margin: 2rem 0;
   }
+  #new-recipe-form {
+    width: 70%;
+  }
+  .container {
+    display: block !important;
+  }
 </style>
