@@ -2,55 +2,94 @@
   <div>
     <b-container id="ContainerLogin">
       <b-row align-v="start" id="rowLogin">
-        <b-col id="colLogin">
-          <div role="group">
-            <label for="input-live"><h3>Entrar:</h3></label>
-            <b-form-input
-              id="input-live"
-              aria-describedby="input-live-help input-live-feedback"
-              placeholder="E-mail"
-              trim
-            ></b-form-input>
-          </div>
-          <br />
-          <div role="group">
-            <b-form-input
-              id="input-live"
-              aria-describedby="input-live-help input-live-feedback"
-              placeholder="Senha"
-              trim
-            ></b-form-input>
-            <NuxtLink to="/redefinirSenha"
-              ><h4 id="esqueciMinhaSenha">Esqueci minha senha</h4></NuxtLink
+        <b-form @submit="onSubmit" @reset="onReset" v-if="show" id="login-form">
+          <b-col id="colLogin">
+            <b-form-group
+              id="input-group-1"
+              label="Nome:"
+              label-for="input-1"
+              description="Insira seu nome"
             >
-            <b-button block variant="primary" id="LoginButton">Login</b-button>
-            <h4 id="h4CrieUmaConta">
-              Não tem uma conta?<NuxtLink to="/signup">
-                Crie uma</NuxtLink
-              >
-            </h4>
-          </div>
-        </b-col>
-        <b-col align-self="stretch">
-          <div id="imgLogin">
-            <h4 id="textThatMeal">that.meal</h4>
-            <h4 id="textDescrubra">Descubra temperos<br />incríveis</h4>
-          </div>
-        </b-col>
+              <b-form-input
+                id="input-1"
+                v-model="form.username"
+                type="text"
+                required
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-2" label="Senha: " label-for="input-2">
+              <b-form-input
+                  id="input-2"
+                  v-model="form.password"
+                  type="password"
+              ></b-form-input>
+            </b-form-group>
+            <NuxtLink to="/redefinirSenha"><h4 id="esqueciMinhaSenha" style="margin: 5px">Esqueci minha senha</h4></NuxtLink>
+            <b-button  type="submit" variant="primary" id="LoginButton">Login</b-button>
+            <h4 id="h4CrieUmaConta" style="margin: 5px">Não tem uma conta? <NuxtLink to="/signup"  style="padding-left: 3px;">Crie agora.</NuxtLink></h4>
+          </b-col>
+        </b-form>
+        <AsideComponent></AsideComponent>
       </b-row>
     </b-container>
   </div>
 </template>
 
 <script>
+import AsideComponent from "./asideAuth.vue"
 export default {
   name: 'FormLogin',
+  components:{
+    AsideComponent
+  },
+  data() {
+      return {
+        form: {
+          username: '',
+          password: '',
+        },
+        show: true
+      }
+    },
+    methods: {
+      onSubmit(event) {
+        const self = this
+        event.preventDefault()
+        this.$axios.post('http://localhost:5000/login', {
+          username: this.form.username,
+          password: this.form.password
+        })
+        .then(function (response) {
+          document.cookie = `token=${response.data.token}`;
+          document.cookie = `user_id=${response.data.user._id}`;
+          self.$router.push('/');
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      },
+      onReset(event) {
+        event.preventDefault()
+        // Reset our form values
+        this.form.username = ''
+        this.form.password = ''
+        // Trick to reset/clear native browser form validation state
+        this.show = false
+        this.$nextTick(() => {
+          this.show = true
+        })
+      }
+    }
 }
 </script>
 
 <style>
 #LoginButton {
   background-color: #ffc452 !important;
+  border-color: #ffc452 !important;
+  border-radius: 3px;
+
 }
 
 #colLogin {
@@ -84,9 +123,10 @@ export default {
   height: 100%;
   width: 100%;
   background: url('~assets/logo.png') no-repeat;
-  background-position: center;
+  background-position: right !important;
   background-color: #ffc452;
 }
+
 #rowLogin {
   height: 100vh;
 }
@@ -104,7 +144,7 @@ export default {
   position: absolute;
   bottom: 0;
   right: 0;
-  padding-bottom: 40%;
+  padding-bottom: 20% !important;
   padding-right: 5%;
 }
 </style>
