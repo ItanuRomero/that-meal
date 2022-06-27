@@ -5,8 +5,8 @@ const RatingController = require("../controllers/RatingController");
 
 const routes = Router();
 
-routes.get("/rating/:recipe_id", RatingController.list);
+routes.get("/rating/:recipe_id", RatingController.listAll);
 routes.post("/rating", verifyJWT, RatingController.add);
-routes.post("/rating", verifyJWT, RatingController.edit);
+routes.put("/rating/:recipe_id", verifyJWT, RatingController.update);
 
 module.exports = routes;
