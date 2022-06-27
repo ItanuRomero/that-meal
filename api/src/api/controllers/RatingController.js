@@ -24,17 +24,17 @@ module.exports = {
     try {
       const { rating, user_id, recipe_id } = request.body;
       const id = request.params.recipe_id;
-      const recipe = await Rating.findOne({ where: { recipe_id: id } });
+      const ratingUpdate = await Rating.findOne({ where: { recipe_id: id } });
 
       if (!recipe) {
         return response.status(404).json("Nota não encontrada");
       }
 
-      recipe.rating = rating;
-      recipe.user_id = user_id;
-      recipe.recipe_id = recipe_id;
+      ratingUpdate.rating = rating;
+      ratingUpdate.user_id = user_id;
+      ratingUpdate.recipe_id = recipe_id;
 
-      await recipe.save();
+      await ratingUpdate.save();
       response.status(202).json("Nota atualizada com sucesso");
     } catch (error) {
       response.status(400).send(error);

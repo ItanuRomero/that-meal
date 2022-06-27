@@ -65,21 +65,9 @@ module.exports = {
     return await dbConnect
       .collection(collName)
       .findOne(
-          // {
-          //     $where: () => {
-          //         return this.username == username 
-          //     }
-          // }
           {
             username:username
           }
-          // projection configura quais campos irão ser retornados pelo MongDB
-          // , {
-          // projection: {
-          //     _id: 1,
-          //     username: 1,
-          //     pwd: 1,
-          // }
       );
   },
 }
