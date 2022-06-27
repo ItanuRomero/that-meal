@@ -4,7 +4,7 @@ const sequelize = require("../database");
 class RecipeTag extends Model{};
 
 RecipeTag.init({
-  user_id: {
+  recipe_id: {
     type: DataTypes.INTEGER,
     allowNull: false
   },

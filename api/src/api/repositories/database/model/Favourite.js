@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require("../database");
 
-class Comment extends Model{};
+class Favourite extends Model{};
 
-Comment.init({
+Favourite.init({
   user_id: {
     type: DataTypes.INTEGER,
     allowNull: false
@@ -18,4 +18,4 @@ Comment.init({
     timestamps: false
 });
 
-module.exports = Comment;
+module.exports = Favourite;
