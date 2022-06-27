@@ -7,11 +7,13 @@ module.exports ={
     const user = await User(req.body);
     user.password = await utils.encryptPwd(req.body.password);
     user.createdAt = new Date();
+    user.isAdmin = false;
 
     UserService.create(user, (err, result) => {
       if (err) {
         res.status(400).send(err);
       } else {
+        user.password = "*******";
         res.status(201).json(user);
       }
     });
@@ -29,6 +31,8 @@ module.exports ={
       const userUpdate = await User(req.body);
       userUpdate.password = await utils.encryptPwd(req.body.password);
       userUpdate.updatedAt = new Date();
+      userUpdate.isAdmin = false;
+
       const id = req.params.id;
 
       await UserService.updateUserById(userUpdate, id);

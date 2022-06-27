@@ -1,21 +1,21 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require("../database");
 
-class Favourite extends Model{};
+class RecipeTag extends Model{};
 
-Favourite.init({
-  user_id: {
+RecipeTag.init({
+  recipe_id: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  recipe_id: {
+  tag_id: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
 }, { 
     sequelize,
-    modelName: "Favourite",
+    modelName: "RecipeTag",
     timestamps: false
 });
 
-module.exports = Favourite;
+module.exports = RecipeTag;

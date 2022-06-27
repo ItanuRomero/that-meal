@@ -1,9 +1,13 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require("../database");
 
-class Favourite extends Model{};
+class Rating extends Model{};
 
-Favourite.init({
+Rating.init({
+  rating: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
   user_id: {
     type: DataTypes.INTEGER,
     allowNull: false
@@ -14,8 +18,8 @@ Favourite.init({
   },
 }, { 
     sequelize,
-    modelName: "Favourite",
+    modelName: "Rating",
     timestamps: false
 });
 
-module.exports = Favourite;
+module.exports = Rating;
