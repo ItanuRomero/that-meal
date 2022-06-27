@@ -61,7 +61,6 @@ export default {
           password: this.form.password
         })
         .then(function (response) {
-          console.log(response.data.token);
           document.cookie = `token=${response.data.token}`;
           document.cookie = `user_id=${response.data.user._id}`;
           self.$router.push('/');
