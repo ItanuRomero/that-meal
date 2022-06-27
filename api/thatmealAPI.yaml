@@ -287,6 +287,29 @@ paths:
           description: Não permitido
         '400':
           description: bad input parameter
+    put:
+      summary: Atualiza a nota do ID da receita informado
+      tags:
+        - rating
+      description: |
+        Atualiza a nota
+      parameters: 
+        - in: path
+          name: recipe_id
+          description: Recipe ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Nota atualizada com sucesso
+          content:
+            application/text:
+              example: Nota atualizada com sucesso
+        '400':
+          description: invalid input, object invalid
+        '404':
+          description: Nota não encontrada
   /comment/{recipe_id}:
     get:
       summary: Busca todos os comentários de uma receita
@@ -419,7 +442,58 @@ paths:
           description: Não permitido
         '404':
           description: Não encontrado
-
+  /recipetag:
+    get:
+      summary: Busca todas as tags da receita
+      tags:
+        - recipetag
+      description: Listagem todas as tags da receita
+      responses:
+        '200':
+          description: Lista de tags da receita
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe-Tags'
+        '400':
+          description: bad input parameter
+    post:
+      summary: Cria um tag da receita
+      tags:
+        - recipetag
+      description: Adiciona uma tag para a receita
+      responses:
+        '202':
+          description: Tag relacionada com receita criada
+          content:
+            application/text:
+              example: Tag relacionada com receita criada
+        '400':
+          description: bad input parameter
+  /recipetag/{recipetag_id}:
+    delete:
+      summary: Remove a tag da receita
+      tags:
+        - recipetag
+      description: |
+        Deleta a tag da receita
+      parameters: 
+        - in: path
+          name: recipetag_id
+          description: RecipeTag ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Relação entre receita e tag deletada
+          content:
+            application/text:
+              example: Relação entre receita e tag deletada
+        '404':
+          description: Relação entre receita e tag não encontrada
 
 components:
   schemas:
